@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -16,7 +17,7 @@ import java.time.LocalDate;
 public class Resource extends Employee{
 
 
-    private String serialNumber;
+
     private String socialSecurityNumber;
     private String bankAccountNumber;
     private Byte[] photo;
@@ -25,6 +26,11 @@ public class Resource extends Employee{
     private Long productivity;
     private String nationalIdentity;
     private LocalDate recruitmentDate;
+
+    @OneToMany(mappedBy = "resource")
+    private List<Contract> contractsList;
+
+
 
 
 }

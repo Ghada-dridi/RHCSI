@@ -21,4 +21,8 @@ public class BenefitRC {
     @Enumerated(EnumType.STRING)
     @Column(name = "contractBenifitType")
     private ContractBenifitType contractBenifitType;
+
+    @ManyToOne
+    @JoinColumn(name = "id_contract")
+    private Contract contract;
 }

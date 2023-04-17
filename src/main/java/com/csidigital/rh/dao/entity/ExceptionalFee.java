@@ -24,5 +24,9 @@ public class ExceptionalFee {
     private Currency currency;
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "id_contract")
+    private Contract contract;
+
 
 }

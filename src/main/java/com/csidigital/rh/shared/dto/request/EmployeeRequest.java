@@ -40,4 +40,6 @@ public class EmployeeRequest {
     private EmployeeStatus employeeStatus;
     private Departement departement;
     private TechnicalFile technicalFile ;
+
+    private String serialNumber;
 }

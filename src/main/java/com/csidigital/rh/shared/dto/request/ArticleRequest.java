@@ -9,7 +9,7 @@ import lombok.Data;
 public class ArticleRequest {
 
     private Integer articleNumber;
-    private String title;
+    private String articleTitle;
     private String description;
 
 }

@@ -56,6 +56,7 @@ public class Employee {
     @Enumerated(EnumType.STRING)
     private Departement departement;
 
+    private String serialNumber;
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "technicalFileId")

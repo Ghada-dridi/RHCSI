@@ -1,5 +1,6 @@
 package com.csidigital.rh.dao.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,8 +17,15 @@ public class Article {
     private Long id;
     @Column(name = "articleNumber")
     private Integer articleNumber;
-    @Column(name = "title")
-    private String title;
+    @Column(name = "articleTitle")
+    private String articleTitle;
     @Column(name = "description")
     private String description;
+
+
+
+    @ManyToOne
+    @JoinColumn(name = "id_contract")
+    private Contract contract;
+
 }

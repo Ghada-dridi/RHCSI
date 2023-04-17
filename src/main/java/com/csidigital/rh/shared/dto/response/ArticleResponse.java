@@ -11,6 +11,6 @@ public class ArticleResponse {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer articleNumber;
-    private String title;
+    private String articleTitle;
     private String description;
 }
