@@ -1,5 +1,6 @@
 package com.csidigital.rh.dao.entity;
 
+import com.csidigital.rh.shared.enumeration.Status;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -30,10 +31,16 @@ public class Contract {
     private LocalDate startDate;
     @Column(name = "endDate")
     private LocalDate endDate;
+
+    private String commentContract;
     @Column(name = "entrepriseSignature")
     private Byte[] entrepriseSignature;
 
+    @Enumerated(EnumType.STRING)
+    private Status contractStatus;
 
+    @Column(name = "contractIntroduction", length = 10000)
+    private String contractIntroduction;
     @JsonIgnore
     @ManyToOne @JoinColumn(name = "id_resource")
     private Resource resource;

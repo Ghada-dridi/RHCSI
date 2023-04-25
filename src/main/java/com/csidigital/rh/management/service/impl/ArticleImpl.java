@@ -2,7 +2,10 @@ package com.csidigital.rh.management.service.impl;
 
 import com.csidigital.rh.dao.entity.Article;
 
+import com.csidigital.rh.dao.entity.Contract;
+import com.csidigital.rh.dao.entity.Resource;
 import com.csidigital.rh.dao.repository.ArticleRepository;
+import com.csidigital.rh.dao.repository.ContractRepository;
 import com.csidigital.rh.management.service.ArticleService;
 import com.csidigital.rh.shared.dto.request.ArticleRequest;
 import com.csidigital.rh.shared.dto.response.ArticleResponse;
@@ -25,11 +28,18 @@ public class ArticleImpl implements ArticleService {
     @Autowired
     private ArticleRepository articleRepository ;
     @Autowired
+    private ContractRepository contractRepository;
+    @Autowired
     private ModelMapper modelMapper;
 
     @Override
     public ArticleResponse createArticle (ArticleRequest request) {
+        Contract contract = null;
+        if (request.getContractId() != null) {
+            contract = contractRepository.findById(request.getContractId())
+                    .orElseThrow();}
         Article article = modelMapper.map(request, Article.class);
+        article.setContract(contract);
         Article ArticleSaved = articleRepository.save(article);
         return modelMapper.map(ArticleSaved, ArticleResponse.class);
     }
@@ -67,6 +77,11 @@ public class ArticleImpl implements ArticleService {
     @Override
     public void deleteArticle(Long id) {
         articleRepository.deleteById(id);
+    }
+
+    @Override
+    public void getArticleDescription(String articleTitle) {
+        articleRepository.getArticleDescription(articleTitle);
     }
 
 }

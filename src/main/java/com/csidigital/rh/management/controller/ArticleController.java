@@ -45,4 +45,11 @@ public class ArticleController {
         articleService.deleteArticle(id);
     }
 
+
+    @GetMapping("/description")
+    public void getArticleDescription(@PathVariable String articleTitle)
+    {
+        articleService.getArticleDescription(articleTitle);
+    }
+
 }

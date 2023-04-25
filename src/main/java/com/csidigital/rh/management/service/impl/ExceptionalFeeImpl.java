@@ -1,6 +1,9 @@
 package com.csidigital.rh.management.service.impl;
 
+import com.csidigital.rh.dao.entity.Contract;
 import com.csidigital.rh.dao.entity.ExceptionalFee;
+import com.csidigital.rh.dao.entity.Resource;
+import com.csidigital.rh.dao.repository.ContractRepository;
 import com.csidigital.rh.dao.repository.ExceptionalFeeRepository;
 import com.csidigital.rh.management.service.ExceptionalFeeService;
 import com.csidigital.rh.shared.dto.request.ExceptionalFeeRequest;
@@ -21,12 +24,23 @@ import java.util.List;
 public class ExceptionalFeeImpl implements ExceptionalFeeService {
     @Autowired 
     private ExceptionalFeeRepository exceptionalFeeRepository ;
+
+    @Autowired
+    private ContractRepository contractRepository;
     @Autowired 
     private ModelMapper modelMapper ;
 
     @Override
     public ExceptionalFeeResponse createExceptionalFee(ExceptionalFeeRequest request) {
+        Contract contract = null;
+        if (request.getContractId() != null) {
+            contract = contractRepository.findById(request.getContractId())
+                    .orElseThrow();}
+
         ExceptionalFee exceptionalFee = modelMapper.map(request, ExceptionalFee.class);
+
+        exceptionalFee.setContract(contract);
+
         ExceptionalFee exceptionalFeeSaved = exceptionalFeeRepository.save(exceptionalFee);
         return modelMapper.map(exceptionalFeeSaved, ExceptionalFeeResponse.class);
     }

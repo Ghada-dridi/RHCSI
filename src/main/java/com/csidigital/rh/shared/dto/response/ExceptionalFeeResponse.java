@@ -12,5 +12,6 @@ public class ExceptionalFeeResponse {
     private Long amount;
     private Currency currency;
     private String name;
+    private Long contractId;
 
 }

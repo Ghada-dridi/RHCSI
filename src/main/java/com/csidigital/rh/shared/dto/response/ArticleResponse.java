@@ -13,4 +13,5 @@ public class ArticleResponse {
     private Integer articleNumber;
     private String articleTitle;
     private String description;
+    private Long contractId;
 }

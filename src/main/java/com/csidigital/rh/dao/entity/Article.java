@@ -19,7 +19,7 @@ public class Article {
     private Integer articleNumber;
     @Column(name = "articleTitle")
     private String articleTitle;
-    @Column(name = "description")
+    @Column(name = "description" , length = 100000)
     private String description;
 
 

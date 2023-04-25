@@ -1,5 +1,6 @@
 package com.csidigital.rh.management.controller;
 
+import com.csidigital.rh.dao.entity.Employee;
 import com.csidigital.rh.management.service.impl.CertificationImpl;
 import com.csidigital.rh.management.service.impl.ContractImpl;
 import com.csidigital.rh.shared.dto.request.CertificationRequest;
@@ -44,5 +45,17 @@ public class ContractController {
     @DeleteMapping("/deleteContract/{id}")
     public void deleteContract(@PathVariable Long id){
         contract.deleteContract(id);
+    }
+    @PutMapping("/updateStatusById")
+    void updateStatusById(Long id, String contractStatus){
+        contract.updateStatusById(id, contractStatus);
+    }
+    @PutMapping("/updateToAcceptedById")
+    void updateStatusToAcceptedById(Long id){
+        contract.updateStatusToAcceptedById(id);
+    }
+    @PutMapping("/updateToRefusedById")
+    void updateStatusToRefusedById(Long id){
+        contract.updateStatusToRefusedById(id);
     }
 }

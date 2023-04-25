@@ -3,6 +3,7 @@ package com.csidigital.rh.shared.dto.request;
 import com.csidigital.rh.dao.entity.Article;
 import com.csidigital.rh.dao.entity.BenefitRC;
 import com.csidigital.rh.dao.entity.ExceptionalFee;
+import com.csidigital.rh.shared.enumeration.Status;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,9 +22,12 @@ public class ContractRequest {
     private String contractPlace;
     private LocalDate contractDate;
     private Byte[] entrepriseSignature;
+    private String commentContract;
+    private String contractIntroduction;
 
     private List<Article> articles ;
+    private Status contractStatus;
     private List<BenefitRC> benefitRCSList;
     private List<ExceptionalFee>  ExceptionalFeeList;
-    private Long id_resource;
+    private Long resourceId;
 }
