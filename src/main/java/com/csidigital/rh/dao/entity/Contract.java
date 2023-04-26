@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -44,9 +45,16 @@ public class Contract {
     @JsonIgnore
     @ManyToOne @JoinColumn(name = "id_resource")
     private Resource resource;
-
+/*
     @OneToMany(mappedBy = "contract")
-    private List<Article> articles;
+    private List<Article> articles;*/
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+        name = "AssContractArticle",
+        joinColumns = @JoinColumn(name = "id_contract"),
+        inverseJoinColumns = @JoinColumn(name = "id_article"))
+    private List<Article> articles = new ArrayList<>();
     @OneToMany(mappedBy = "contract")
     private List<BenefitRC> benefitRCSList;
 

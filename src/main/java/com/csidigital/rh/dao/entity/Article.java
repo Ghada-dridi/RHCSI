@@ -6,11 +6,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,9 +25,7 @@ public class Article {
     private String description;
 
 
-
-    @ManyToOne
-    @JoinColumn(name = "id_contract")
-    private Contract contract;
-
+    @JsonIgnore
+    @ManyToMany(mappedBy = "articles")
+    private List<Contract> contracts = new ArrayList<>();
 }

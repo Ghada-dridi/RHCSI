@@ -39,7 +39,7 @@ public class ArticleImpl implements ArticleService {
             contract = contractRepository.findById(request.getContractId())
                     .orElseThrow();}
         Article article = modelMapper.map(request, Article.class);
-        article.setContract(contract);
+       // article.setContract(contract);
         Article ArticleSaved = articleRepository.save(article);
         return modelMapper.map(ArticleSaved, ArticleResponse.class);
     }
