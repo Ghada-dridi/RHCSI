@@ -7,6 +7,10 @@ import lombok.Data;
 public class AssContractArticleRequest {
     private Long articleId;
     private Long contractId;
+    private Integer articleNumber;
+
+
+    private String description;
 
     public Long getContractId() {
         return contractId;

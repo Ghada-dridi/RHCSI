@@ -13,7 +13,7 @@ public class ArticleResponse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer articleNumber;
+
     private String articleTitle;
     private String description;
     private List<Contract> contracts;
