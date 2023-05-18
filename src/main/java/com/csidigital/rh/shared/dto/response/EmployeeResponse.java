@@ -1,11 +1,24 @@
 package com.csidigital.rh.shared.dto.response;
 
+<<<<<<< HEAD
 import com.csidigital.rh.shared.enumeration.*;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.Data;
 
 import java.time.LocalDate;
+=======
+import com.csidigital.rh.dao.entity.Experience;
+import com.csidigital.rh.dao.entity.TechnicalFile;
+import com.csidigital.rh.shared.enumeration.*;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Lob;
+import lombok.Data;
+
+import java.time.LocalDate;
+import java.util.List;
+>>>>>>> ghada_candidat
 import java.util.Set;
 
 @Data
@@ -24,7 +37,11 @@ public class EmployeeResponse {
     private String address;
     private Integer postCode;
     private String city;
+<<<<<<< HEAD
     private Country country;
+=======
+    private String country;
+>>>>>>> ghada_candidat
     private MaritalSituation maritalSituation;
     private Integer recommendationMark ;
     private Integer experience ;
@@ -45,4 +62,12 @@ public class EmployeeResponse {
 
     private Set<Long> offer;
     private Departement departement;
+<<<<<<< HEAD
+=======
+    private TechnicalFile technicalFile ;
+
+    private String  photo;
+    @Enumerated(EnumType.STRING)
+    private ResourceType resourceType;
+>>>>>>> ghada_candidat
 }

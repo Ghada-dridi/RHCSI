@@ -1,8 +1,14 @@
 package com.csidigital.rh.management.service;
 
 import com.csidigital.rh.dao.entity.Employee;
+<<<<<<< HEAD
 import com.csidigital.rh.shared.dto.request.EmployeeRequest;
 import com.csidigital.rh.shared.dto.response.EmployeeResponse;
+=======
+import com.csidigital.rh.dao.entity.OfferCandidate;
+import com.csidigital.rh.shared.dto.request.EmployeeRequest;
+import com.csidigital.rh.shared.dto.response.*;
+>>>>>>> ghada_candidat
 
 import java.util.List;
 
@@ -14,6 +20,16 @@ public interface EmployeeService {
     EmployeeResponse updateEmployee(EmployeeRequest request, Long id);
 
     void deleteEmployee(Long id);
+<<<<<<< HEAD
+=======
+    TechnicalFileResponse getEmployeeTechnicalFile(Long id);
+
+    List<EducationResponse> getEmployeeEducation(Long id);
+    List<ExperienceResponse> getEmployeeExperience(Long id);
+    List<CertificationResponse> getEmployeeCertification(Long id);
+    List<LanguageResponse> getEmployeeLanguage(Long id);
+    List<SkillsResponse> getEmployeeSkills(Long id);
+>>>>>>> ghada_candidat
 
     String employeeSerialNumberGenerator ();
 
@@ -25,4 +41,9 @@ public interface EmployeeService {
     List<Employee> getAllResourcesInterne ();
 
     List<Employee> getAllResourcesExterne();
+<<<<<<< HEAD
 }
+=======
+    List<AssOfferCandidateResponse> getOfferCandidates(Long id);
+}
+>>>>>>> ghada_candidat

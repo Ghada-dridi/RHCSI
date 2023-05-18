@@ -20,8 +20,12 @@ public class Resource extends Employee{
 
     private String socialSecurityNumber;
     private String bankAccountNumber;
+<<<<<<< HEAD
     @Lob
     private String  photo;
+=======
+
+>>>>>>> ghada_candidat
     private double leaveBalanceRest;
     private double leaveBalance;
     private Long productivity;

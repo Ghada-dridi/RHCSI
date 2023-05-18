@@ -8,6 +8,8 @@ import com.csidigital.rh.shared.dto.request.AdministrativeDataRequest;
 import com.csidigital.rh.shared.dto.request.BackOfficeRequest;
 import com.csidigital.rh.shared.dto.response.AdministrativeDataResponse;
 import com.csidigital.rh.shared.dto.response.BackOfficeResponse;
+import com.csidigital.rh.shared.enumeration.ResourceType;
+import com.csidigital.rh.shared.enumeration.Status;
 import com.csidigital.rh.shared.exception.ResourceNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -30,6 +32,7 @@ public class BackOfficeImpl implements BackOfficeService {
     @Override
     public BackOfficeResponse createBackoffice(BackOfficeRequest request) {
         BackOffice backOffice = modelMapper.map(request, BackOffice.class);
+        backOffice.setResourceType(ResourceType.BACKOFFICE_RESOURCE);
         BackOffice backOfficeSaved = backOfficeRepository.save(backOffice);
         return modelMapper.map(backOfficeSaved, BackOfficeResponse.class);
     }

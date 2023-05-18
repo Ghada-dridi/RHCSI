@@ -19,6 +19,10 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
+<<<<<<< HEAD
+=======
+
+>>>>>>> ghada_candidat
     private String lastName;
     @Column(name = "firstName")
     private String firstName;
@@ -36,8 +40,13 @@ public class Employee {
     private String address;
     private Integer postCode;
     private String city;
+<<<<<<< HEAD
     @Enumerated(EnumType.STRING)
     private Country country;
+=======
+
+    private String country;
+>>>>>>> ghada_candidat
     @Enumerated(EnumType.STRING)
     private MaritalSituation maritalSituation;
     private Integer recommendationMark ;
@@ -53,6 +62,7 @@ public class Employee {
     private WorkLocation workLocation;
 
 
+<<<<<<< HEAD
 
     @Enumerated(EnumType.STRING)
     private Departement departement;
@@ -63,3 +73,22 @@ public class Employee {
     @JoinColumn(name = "technicalFileId")
     private TechnicalFile technicalFile;
 }
+=======
+    @Enumerated(EnumType.STRING)
+    private Departement departement;
+
+    @Enumerated(EnumType.STRING)
+    private ResourceType resourceType;
+
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL,
+            mappedBy = "employee")
+    private TechnicalFile technicalFile;
+
+    @OneToMany(mappedBy = "employee")
+    private List<OfferCandidate> offerCandidateList;
+    @JsonIgnore
+    @OneToOne(mappedBy = "employee")
+    private AdministrativeData administrativeData;
+}
+>>>>>>> ghada_candidat

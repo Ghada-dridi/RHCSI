@@ -9,6 +9,10 @@ import com.csidigital.rh.shared.dto.request.RecommendationRewardRequest;
 import com.csidigital.rh.shared.dto.request.ResourceRequest;
 import com.csidigital.rh.shared.dto.response.RecommendationRewardResponse;
 import com.csidigital.rh.shared.dto.response.ResourceResponse;
+<<<<<<< HEAD
+=======
+import com.csidigital.rh.shared.enumeration.ResourceType;
+>>>>>>> ghada_candidat
 import com.csidigital.rh.shared.exception.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -30,6 +34,10 @@ public class ResourceImpl implements ResourceService {
     @Override
     public ResourceResponse createResource(ResourceRequest request) {
         Resource resource = modelMapper.map(request, Resource.class);
+<<<<<<< HEAD
+=======
+        resource.setResourceType(ResourceType.INTERNAL_RESOURCE);
+>>>>>>> ghada_candidat
         Resource resourceSaved = resourceRepository.save(resource);
         return modelMapper.map(resourceSaved, ResourceResponse.class);
     }

@@ -5,6 +5,10 @@ import com.csidigital.rh.dao.repository.ExternalResourceRepository;
 import com.csidigital.rh.management.service.ExternalResourceService;
 import com.csidigital.rh.shared.dto.request.ExternalResourceRequest;
 import com.csidigital.rh.shared.dto.response.ExternalResourceResponse;
+<<<<<<< HEAD
+=======
+import com.csidigital.rh.shared.enumeration.ResourceType;
+>>>>>>> ghada_candidat
 import com.csidigital.rh.shared.exception.ResourceNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -28,6 +32,10 @@ public class ExternalResourceImpl implements ExternalResourceService {
     @Override
     public ExternalResourceResponse createExternalResource(ExternalResourceRequest request) {
         ExternalResource externalResource = modelMapper.map(request, ExternalResource.class);
+<<<<<<< HEAD
+=======
+        externalResource.setResourceType(ResourceType.EXTERNAL_RESOURCE);
+>>>>>>> ghada_candidat
         ExternalResource externalResourceSaved = externalResourceRepository.save(externalResource);
         return modelMapper.map(externalResourceSaved, ExternalResourceResponse.class);
     }
