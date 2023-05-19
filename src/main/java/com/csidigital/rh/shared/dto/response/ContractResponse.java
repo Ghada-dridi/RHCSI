@@ -30,5 +30,5 @@ public class ContractResponse {
     private Status contractStatus;
     private List<BenefitRC> benefitRCSList;
     private List<ExceptionalFee>  ExceptionalFeeList;
-    private Long resourceId;
+    private Long employeeId;
 }

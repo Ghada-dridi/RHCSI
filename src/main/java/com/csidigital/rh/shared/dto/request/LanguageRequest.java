@@ -14,5 +14,5 @@ public class LanguageRequest {
     private String language;
     private LanguageLevel languageLevel;
     private String additionalInformation;
-    private Long technicalFileId ;
+    private Long technicalFileNum ;
 }

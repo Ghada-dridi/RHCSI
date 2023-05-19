@@ -35,7 +35,7 @@ public class TechnicalFileImpl implements TechnicalFileService {
 
     @Override
     public TechnicalFileResponse createTechnicalFile(TechnicalFileRequest request) {
-        Employee employee =  employeeRepository.findById(request.getEmployeeId()).orElseThrow();
+        Employee employee =  employeeRepository.findById(request.getEmployeeNum()).orElseThrow();
         TechnicalFile technicalFile= modelMapper.map(request, TechnicalFile.class);
         technicalFile.setEmployee(employee);
         TechnicalFile technicalFileSaved = technicalFileRepository.save(technicalFile);

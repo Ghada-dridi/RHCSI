@@ -66,8 +66,8 @@ public class ContractImpl implements ContractService {
     @Transactional
     public ContractResponse createContract(ContractRequest request) {
         Resource resource = null;
-        if (request.getResourceId() != null) {
-            resource = resourceRepository.findById(request.getResourceId())
+        if (request.getEmployeeId() != null) {
+            resource = resourceRepository.findById(request.getEmployeeId())
                     .orElseThrow();
         }
 

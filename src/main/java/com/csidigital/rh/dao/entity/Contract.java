@@ -44,8 +44,8 @@ public class Contract {
     @Column(name = "contractIntroduction", length = 10000)
     private String contractIntroduction;
     @JsonIgnore
-    @ManyToOne @JoinColumn(name = "id_resource")
-    private Resource resource;
+    @ManyToOne @JoinColumn(name = "id_employee")
+    private Employee employee;
 
 
    // @JsonIgnore

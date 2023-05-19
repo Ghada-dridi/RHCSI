@@ -1,14 +1,14 @@
 package com.csidigital.rh.management.service.impl;
 
 import com.csidigital.rh.dao.entity.*;
+import com.csidigital.rh.dao.repository.EmployeeReferenceSequenceRepository;
 import com.csidigital.rh.dao.repository.EmployeeRepository;
 import com.csidigital.rh.management.service.EmployeeService;
 import com.csidigital.rh.shared.dto.request.EmployeeRequest;
-<<<<<<< HEAD
+
 import com.csidigital.rh.shared.dto.response.EmployeeResponse;
-=======
+
 import com.csidigital.rh.shared.dto.response.*;
->>>>>>> ghada_candidat
 import com.csidigital.rh.shared.enumeration.EmployeeStatus;
 import com.csidigital.rh.shared.exception.ResourceNotFoundException;
 import jakarta.transaction.Transactional;
@@ -24,7 +24,7 @@ import java.util.List;
 @Transactional
 @AllArgsConstructor
 public class EmployeeImpl implements EmployeeService {
-<<<<<<< HEAD
+
 
 
     @Autowired
@@ -33,20 +33,23 @@ public class EmployeeImpl implements EmployeeService {
     @Autowired
     private ModelMapper modelMapper ;
 
-
+    @Autowired
+    private EmployeeReferenceSequenceRepository employeeReferenceSequenceRepository;
 
 
 
     @Override
     public EmployeeResponse createEmployee(EmployeeRequest request) {
+
         Employee employee = modelMapper.map(request, Employee.class);
-        if (employee instanceof BackOffice || employee instanceof Resource) {
+
+       /* if (employee instanceof BackOffice || employee instanceof Resource) {
             String code = employeeSerialNumberGenerator();
             employee.setSerialNumber(code);
         }
         else {
             employee.setSerialNumber(null);
-        }
+        }*/
 
         Employee employeeSaved = employeeRepository.save(employee);
         return modelMapper.map(employeeSaved, EmployeeResponse.class);
@@ -55,19 +58,6 @@ public class EmployeeImpl implements EmployeeService {
     }
 
 
-=======
-    @Autowired
-    private EmployeeRepository employeeRepository ;
-    @Autowired
-    private ModelMapper modelMapper ;
-    @Override
-    public EmployeeResponse createEmployee(EmployeeRequest request) {
-        Employee employee = modelMapper.map(request, Employee.class);
-        Employee employeeSaved = employeeRepository.save(employee);
-        return modelMapper.map(employeeSaved, EmployeeResponse.class);
-    }
-
->>>>>>> ghada_candidat
     @Override
     public List<EmployeeResponse> getAllEmployees() {
         List<Employee> employees = employeeRepository.findAll();
@@ -88,8 +78,7 @@ public class EmployeeImpl implements EmployeeService {
         EmployeeResponse employeeResponse = modelMapper.map(employee, EmployeeResponse.class);
         return employeeResponse;
     }
-<<<<<<< HEAD
-=======
+
     @Override
     public TechnicalFileResponse getEmployeeTechnicalFile(Long id) {
         Employee employee = employeeRepository.findById(id)
@@ -98,6 +87,7 @@ public class EmployeeImpl implements EmployeeService {
         TechnicalFileResponse technicalFileResponse = modelMapper.map(technicalFile, TechnicalFileResponse.class);
         return technicalFileResponse ;
     }
+
 
     @Override
     public List<EducationResponse> getEmployeeEducation(Long id) {
@@ -186,7 +176,47 @@ public class EmployeeImpl implements EmployeeService {
         return assOfferCandidateResponseList ;
     }
 
->>>>>>> ghada_candidat
+    @Override
+    public void updateStatusToInProcessById(Long id) {
+
+        employeeRepository.updateStatusToInProcessById(id);
+    }
+
+    @Override
+    public void updateStatusToInProgressById(Long id) {
+
+        employeeRepository.updateStatusToInProcessById(id);
+    }
+
+
+    @Override
+    public void updateStatusToTopProfilesById(Long id) {
+        employeeRepository.updateStatusToTopProfilesById(id);
+    }
+
+    @Override
+    public void updateStatusToPreQualifiedById(Long id) {
+
+        employeeRepository.updateStatusToPreQualifiedById(id);
+    }
+
+    @Override
+    public void updateStatusToConvertedToResourceById(Long id) {
+        employeeRepository.updateStatusToConvertedToResourceById(id);
+    }
+
+    @Override
+    public void updateStatusToDoNotContactById(Long id) {
+
+        employeeRepository.updateStatusToDoNotContactById(id);
+    }
+
+    @Override
+    public void updateStatusToArchiveById(Long id) {
+
+        employeeRepository.updateStatusToArchiveById(id);
+    }
+
 
     @Override
     public EmployeeResponse updateEmployee(EmployeeRequest request, Long id) {
@@ -198,15 +228,12 @@ public class EmployeeImpl implements EmployeeService {
     }
 
     @Override
-<<<<<<< HEAD
+
     public void deleteEmployee(Long id) {
        employeeRepository.deleteById(id);
     }
 
-    @Override
-    public String employeeSerialNumberGenerator() {
-        return null;
-    }
+
 
 
 //
@@ -231,8 +258,8 @@ public class EmployeeImpl implements EmployeeService {
 //        return "E_" + numbers;
 //    }
 
-=======
-    public void deleteEmployee(Long id) {employeeRepository.deleteById(id);}
+
+
 
     @Override
     public String employeeSerialNumberGenerator() {
@@ -255,7 +282,7 @@ public class EmployeeImpl implements EmployeeService {
         return "P_" + numbers;
     }
 
->>>>>>> ghada_candidat
+
     @Override
     public List<Employee> findByEmployeeStatus() {
         return employeeRepository.findByEmployeeStatus(EmployeeStatus.CONVERTED_TO_RESOURCE);
@@ -280,11 +307,9 @@ public class EmployeeImpl implements EmployeeService {
     public List<Employee> getAllResourcesExterne() {
         return employeeRepository.getAllResourcesExterne();
     }
-<<<<<<< HEAD
-}
-=======
+
 
 
 
 }
->>>>>>> ghada_candidat
+

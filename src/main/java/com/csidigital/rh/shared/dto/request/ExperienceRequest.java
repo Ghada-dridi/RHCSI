@@ -13,6 +13,6 @@ public class ExperienceRequest {
     private String  technology;
     private String  experienceTitle;
     private String  experiencePost ;
-    private Long technicalFileId ;
+    private Long technicalFileNum ;
 
 }

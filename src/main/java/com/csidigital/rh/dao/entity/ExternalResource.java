@@ -8,7 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @AllArgsConstructor
-
+@NoArgsConstructor
 public class ExternalResource extends Employee{
+    private String serialNumber;
 
 }

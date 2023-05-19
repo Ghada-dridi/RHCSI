@@ -8,5 +8,6 @@ public class ExternalResourceResponse extends EmployeeResponse{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
+    private String serialNumber;
 }
 

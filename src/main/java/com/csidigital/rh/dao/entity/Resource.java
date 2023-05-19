@@ -18,20 +18,7 @@ public class Resource extends Employee{
 
 
 
-    private String socialSecurityNumber;
-    private String bankAccountNumber;
-<<<<<<< HEAD
-    @Lob
-    private String  photo;
-=======
 
->>>>>>> ghada_candidat
-    private double leaveBalanceRest;
-    private double leaveBalance;
-    private Long productivity;
-    private String nationalIdentity;
-    private LocalDate recruitmentDate;
-    private Boolean isEmployee;
 
     @OneToMany(mappedBy = "resource")
     private List<Contract> contractsList;

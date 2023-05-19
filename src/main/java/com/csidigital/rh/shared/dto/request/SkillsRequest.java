@@ -11,6 +11,6 @@ public class SkillsRequest {
 
     private String skillsTitle;
 
-    private Long technicalFileId ;
+    private Long technicalFileNum ;
   //  private Long skillsCategoryId ;
 }

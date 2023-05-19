@@ -30,7 +30,7 @@ public class LanguageImpl implements LanguageService {
 
     @Override
     public LanguageResponse createLanguage(LanguageRequest request) {
-        TechnicalFile technicalFile= technicalFileRepository.findById(request.getTechnicalFileId()).orElseThrow();
+        TechnicalFile technicalFile= technicalFileRepository.findById(request.getTechnicalFileNum()).orElseThrow();
         Language language = modelMapper.map(request, Language.class);
         language.setTechnicalFile(technicalFile);
         Language LanguageSaved = languageRepository.save(language);
@@ -61,7 +61,7 @@ public class LanguageImpl implements LanguageService {
 
     @Override
     public LanguageResponse updateLanguage(LanguageRequest request, Long id) {
-        TechnicalFile technicalFile = technicalFileRepository.findById(request.getTechnicalFileId()).orElseThrow();
+        TechnicalFile technicalFile = technicalFileRepository.findById(request.getTechnicalFileNum()).orElseThrow();
         Language existingLanguage = languageRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Language with id: " + id + " not found"));
         modelMapper.map(request, existingLanguage);

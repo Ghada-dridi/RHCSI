@@ -30,7 +30,7 @@ public class EducationImpl implements EducationService {
     private TechnicalFileRepository technicalFileRepository;
     @Override
     public EducationResponse createEducation(EducationRequest request) {
-        TechnicalFile technicalFile = technicalFileRepository.findById(request.getTechnicalFileId()).orElseThrow();
+        TechnicalFile technicalFile = technicalFileRepository.findById(request.getTechnicalFileNum()).orElseThrow();
         Education education = modelMapper.map(request, Education.class);
         education.setTechnicalFile(technicalFile);
         Education educationSaved = educationRepository.save(education);
@@ -60,7 +60,7 @@ public class EducationImpl implements EducationService {
 
     @Override
     public EducationResponse updateEducation(EducationRequest request, Long id) {
-        TechnicalFile technicalFile = technicalFileRepository.findById(request.getTechnicalFileId()).orElseThrow();
+        TechnicalFile technicalFile = technicalFileRepository.findById(request.getTechnicalFileNum()).orElseThrow();
         Education existingEducation = educationRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Education with id: " + id + " not found"));
         modelMapper.map(request, existingEducation);

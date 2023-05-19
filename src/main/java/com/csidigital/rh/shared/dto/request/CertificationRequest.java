@@ -11,6 +11,6 @@ public class CertificationRequest {
     private LocalDate certificationObtainedDate;
     private String certificationTitle;
 
-    private Long technicalFileId ;
+    private Long technicalFileNum ;
 
 }

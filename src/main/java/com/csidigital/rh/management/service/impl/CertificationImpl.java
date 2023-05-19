@@ -32,7 +32,7 @@ public class CertificationImpl implements CertificationService {
 
     @Override
     public CertificationResponse createCertification(CertificationRequest request) {
-        TechnicalFile technicalFile = technicalFileRepository.findById(request.getTechnicalFileId()).orElseThrow();
+        TechnicalFile technicalFile = technicalFileRepository.findById(request.getTechnicalFileNum()).orElseThrow();
         Certification certification = modelMapper.map(request, Certification.class);
         certification.setTechnicalFile(technicalFile);
         Certification certificationSaved = certificationRepository.save(certification);
@@ -62,7 +62,7 @@ public class CertificationImpl implements CertificationService {
 
     @Override
     public CertificationResponse updateCertification(CertificationRequest request, Long id) {
-        TechnicalFile technicalFile = technicalFileRepository.findById(request.getTechnicalFileId())
+        TechnicalFile technicalFile = technicalFileRepository.findById(request.getTechnicalFileNum())
                 .orElseThrow(/*() -> new ResourceNotFoundException("Technical File not found with id " + technicalFileId)*/);
         Certification existingCertification = certificationRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Certification with id: " + id + " not found"));

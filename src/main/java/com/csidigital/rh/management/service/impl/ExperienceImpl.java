@@ -30,7 +30,7 @@ public class ExperienceImpl implements ExperienceService {
 
     @Override
     public ExperienceResponse createExperience(ExperienceRequest request) {
-        TechnicalFile technicalFile= technicalFileRepository.findById(request.getTechnicalFileId()).orElseThrow();
+        TechnicalFile technicalFile= technicalFileRepository.findById(request.getTechnicalFileNum()).orElseThrow();
         Experience experience = modelMapper.map(request, Experience.class);
         experience.setTechnicalFile(technicalFile);
         Experience experienceSaved = experienceRepository.save(experience);
@@ -60,7 +60,7 @@ public class ExperienceImpl implements ExperienceService {
 
     @Override
     public ExperienceResponse updateExperience(ExperienceRequest request, Long id) {
-        TechnicalFile technicalFile = technicalFileRepository.findById(request.getTechnicalFileId()).orElseThrow();
+        TechnicalFile technicalFile = technicalFileRepository.findById(request.getTechnicalFileNum()).orElseThrow();
         Experience existingExperience = experienceRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Experience with id: " + id + " not found"));
         modelMapper.map(request, existingExperience);

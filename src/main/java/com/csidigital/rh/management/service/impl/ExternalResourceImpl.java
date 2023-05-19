@@ -1,14 +1,15 @@
 package com.csidigital.rh.management.service.impl;
 
+import com.csidigital.rh.dao.entity.EmployeeReferenceSequence;
 import com.csidigital.rh.dao.entity.ExternalResource;
+import com.csidigital.rh.dao.repository.EmployeeReferenceSequenceRepository;
 import com.csidigital.rh.dao.repository.ExternalResourceRepository;
 import com.csidigital.rh.management.service.ExternalResourceService;
 import com.csidigital.rh.shared.dto.request.ExternalResourceRequest;
 import com.csidigital.rh.shared.dto.response.ExternalResourceResponse;
-<<<<<<< HEAD
-=======
+
 import com.csidigital.rh.shared.enumeration.ResourceType;
->>>>>>> ghada_candidat
+
 import com.csidigital.rh.shared.exception.ResourceNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -27,15 +28,24 @@ public class ExternalResourceImpl implements ExternalResourceService {
     @Autowired
     private ExternalResourceRepository externalResourceRepository ;
     @Autowired
+    private EmployeeReferenceSequenceRepository employeeReferenceSequenceRepository;
+    @Autowired
     private ModelMapper modelMapper;
 
     @Override
     public ExternalResourceResponse createExternalResource(ExternalResourceRequest request) {
+        EmployeeReferenceSequence sequence = employeeReferenceSequenceRepository.findById(1L)
+                .orElse(null) ;
+        if (sequence == null) {
+            sequence = new EmployeeReferenceSequence();
+            sequence = employeeReferenceSequenceRepository.save(sequence);
+        }
         ExternalResource externalResource = modelMapper.map(request, ExternalResource.class);
-<<<<<<< HEAD
-=======
+        String employeeReference = String.format("EX_%04d", sequence.getNextValue());
+        externalResource.setSerialNumber(employeeReference);
         externalResource.setResourceType(ResourceType.EXTERNAL_RESOURCE);
->>>>>>> ghada_candidat
+        sequence.incrementNextValue();
+        employeeReferenceSequenceRepository.save(sequence);
         ExternalResource externalResourceSaved = externalResourceRepository.save(externalResource);
         return modelMapper.map(externalResourceSaved, ExternalResourceResponse.class);
     }

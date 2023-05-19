@@ -52,12 +52,12 @@ public class ContractController {
     void updateStatusById(Long id, String contractStatus){
         contract.updateStatusById(id, contractStatus);
     }
-    @PutMapping("/updateToAcceptedById")
-    void updateStatusToAcceptedById(Long id){
+    @PutMapping("/updateToAcceptedById/{id}")
+    void updateStatusToAcceptedById(@PathVariable Long id){
         contract.updateStatusToAcceptedById(id);
     }
-    @PutMapping("/updateToRefusedById")
-    void updateStatusToRefusedById(Long id){
+    @PutMapping("/updateToRefusedById/{id}")
+    void updateStatusToRefusedById(@PathVariable Long id){
         contract.updateStatusToRefusedById(id);
     }
     @GetMapping("/{id}/getContractFee")
@@ -71,8 +71,8 @@ public class ContractController {
        return  contract.getContractBenefits(id);
     }
 
-    @PutMapping("/updateToSentById")
-    void updateStatusToSentById(Long id){
+    @PutMapping("/updateToSentById/{id}")
+    void updateStatusToSentById(@PathVariable Long id){
 
         contract.updateStatusToSentById(id);
     }
