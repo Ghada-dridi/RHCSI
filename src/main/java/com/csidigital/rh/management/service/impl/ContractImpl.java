@@ -204,12 +204,12 @@ public class ContractImpl implements ContractService {
     @Override
     public List<ExceptionalFee> getContractFee(Long id) {
 
-            Contract contract = contractRepository.findById(id)
-                    .orElseThrow(() -> new ResourceNotFoundException("Contract with id " + id + " not found"));
-            List<ExceptionalFee> exceptionalFee = contract.getExceptionalFeeList();
+        Contract contract = contractRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Contract with id " + id + " not found"));
+        List<ExceptionalFee> exceptionalFee = contract.getExceptionalFeeList();
 
-            return exceptionalFee;
-        }
+        return exceptionalFee;
+    }
 
     @Override
     public void updateStatusToSentById(Long id) {

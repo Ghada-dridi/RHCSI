@@ -1,5 +1,9 @@
 package com.csidigital.rh.management.controller;
 
+import com.csidigital.rh.dao.entity.ArticleUpdated;
+import com.csidigital.rh.dao.entity.BenefitRC;
+import com.csidigital.rh.dao.entity.Employee;
+import com.csidigital.rh.dao.entity.ExceptionalFee;
 import com.csidigital.rh.management.service.impl.CertificationImpl;
 import com.csidigital.rh.management.service.impl.ContractImpl;
 import com.csidigital.rh.shared.dto.request.CertificationRequest;
@@ -37,12 +41,44 @@ public class ContractController {
 
     @PutMapping("/updateContract/{id}")
     public ContractResponse updateContract(@Valid @RequestBody ContractRequest contractRequest,
-                                                     @PathVariable Long id){
+                                           @PathVariable Long id){
         return contract.updateContract(contractRequest, id);
     }
 
     @DeleteMapping("/deleteContract/{id}")
     public void deleteContract(@PathVariable Long id){
         contract.deleteContract(id);
+    }
+    @PutMapping("/updateStatusById")
+    void updateStatusById(Long id, String contractStatus){
+        contract.updateStatusById(id, contractStatus);
+    }
+    @PutMapping("/updateToAcceptedById/{id}")
+    void updateStatusToAcceptedById(@PathVariable Long id){
+        contract.updateStatusToAcceptedById(id);
+    }
+    @PutMapping("/updateToRefusedById/{id}")
+    void updateStatusToRefusedById(@PathVariable Long id){
+        contract.updateStatusToRefusedById(id);
+    }
+    @GetMapping("/{id}/getContractFee")
+    public  List<ExceptionalFee> getContractFee(@PathVariable Long id)
+    {
+        return contract.getContractFee(id);
+    }
+    @GetMapping("/{id}/getContractBenefits")
+    public List<BenefitRC> getContractBenefits(@PathVariable Long id)
+    {
+        return  contract.getContractBenefits(id);
+    }
+
+    @PutMapping("/updateToSentById/{id}")
+    void updateStatusToSentById(@PathVariable Long id){
+
+        contract.updateStatusToSentById(id);
+    }
+    @GetMapping("/getArticleContractById/{id}")
+    public List<ArticleUpdated> getArticleContractById(@PathVariable Long id){
+        return  contract.getArticleContractById(id);
     }
 }
