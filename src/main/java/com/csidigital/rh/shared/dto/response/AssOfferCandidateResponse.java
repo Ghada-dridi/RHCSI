@@ -9,18 +9,14 @@ import lombok.Data;
 
 import java.time.LocalDate;
 @Data
-
 public class AssOfferCandidateResponse {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private LocalDate applicationDate;
     private ExperienceLevel experienceLevel;
 
-
-
-    private Long offerNum;
-    private Long employeeNum;
-    private Long evaluationNum;
-
-
+    private Evaluation evaluation;
+    private Long candidateId;
+    private Long offerId;
 }

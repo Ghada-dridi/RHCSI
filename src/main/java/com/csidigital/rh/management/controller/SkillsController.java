@@ -25,23 +25,23 @@ public class SkillsController {
         return skills.getAllSkills();
     }
 
-    @GetMapping("/gets/{id}")
+    @GetMapping("/getSkills/{id}")
     public SkillsResponse getSkillsById(@PathVariable Long id){
         return skills.getSkillsById(id);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/addSkills")
     public SkillsResponse createSkills(@Valid @RequestBody SkillsRequest skillsRequest){
         return skills.createSkills(skillsRequest);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/updateSkills/{id}")
     public SkillsResponse updateSkills(@Valid @RequestBody SkillsRequest skillsRequest,
-                                       @PathVariable Long id){
+                                                       @PathVariable Long id){
         return skills.updateSkills(skillsRequest, id);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/deleteSkills/{id}")
     public void deleteSkills(@PathVariable Long id){
         skills.deleteSkills(id);
     }

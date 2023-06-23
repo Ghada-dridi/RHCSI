@@ -12,13 +12,15 @@ import java.util.List;
 public class TechnicalFileRequest {
     private  String reference;
     private String description;
+    private String title;
     private String objective;
     private String driverLicense;
-    private List<Skills> skills;
-    private List<Experience> experiences;
-    private List <Language> languages;
-    private List<Certification> certifications;
-    private List<Education> educations;
-    private Long employeeNum;
-    private Long experienceAmount;
+    private Nationality nationality;
+
+    private List<Skills> skillsList;
+    private List<Experience> experienceList;
+    private List <Language> languageList;
+    private List<Certification> certificationList;
+    private List<Education> educationList;
+
 }

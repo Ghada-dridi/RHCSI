@@ -1,12 +1,8 @@
 package com.csidigital.rh.management.service.impl;
 
-import com.csidigital.rh.dao.entity.AdministrativeData;
-import com.csidigital.rh.dao.entity.Employee;
 import com.csidigital.rh.dao.entity.Evaluation;
 import com.csidigital.rh.dao.entity.OfferCandidate;
-import com.csidigital.rh.dao.repository.AdministrativeDataRepository;
 import com.csidigital.rh.dao.repository.AssOfferCandidateRepository;
-import com.csidigital.rh.dao.repository.EmployeeRepository;
 import com.csidigital.rh.dao.repository.EvaluationRepository;
 import com.csidigital.rh.management.service.EvaluationService;
 import com.csidigital.rh.shared.dto.request.EvaluationRequest;
@@ -24,25 +20,18 @@ import java.util.List;
 @Transactional
 @AllArgsConstructor
 public class EvaluationImpl implements EvaluationService {
-    @Autowired
-    private EvaluationRepository evaluationRepository ;
-    @Autowired
-    private ModelMapper modelMapper ;
-    @Autowired
-    private AssOfferCandidateRepository offerCandidateRepository;
-
-    @Autowired
-    private AdministrativeDataRepository administrativeDataRepository;
-
-    @Autowired
-    private EmployeeRepository employeeRepository;
-
+   @Autowired 
+   private EvaluationRepository evaluationRepository ; 
+   @Autowired 
+   private ModelMapper modelMapper ;
+   @Autowired
+   private AssOfferCandidateRepository offerCandidateRepository;
     @Override
     public EvaluationResponse createEvaluation(EvaluationRequest request) {
-        Employee employee =  employeeRepository.findById(request.getEmployeeNum()).orElseThrow();
+        OfferCandidate offerCandidate = offerCandidateRepository.findById(request.getOfferCandidateId()).orElseThrow();
         Evaluation evaluation = modelMapper.map(request, Evaluation.class);
-        evaluation.setEmployee(employee);
         Evaluation evaluationSaved = evaluationRepository.save(evaluation);
+        evaluation.setOfferCandidate(offerCandidate);
         return modelMapper.map(evaluationSaved, EvaluationResponse.class);
     }
 

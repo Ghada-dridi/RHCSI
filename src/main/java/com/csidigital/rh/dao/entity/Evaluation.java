@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
 @Data
 @AllArgsConstructor
@@ -20,9 +18,9 @@ public class Evaluation{
     @Column(name = "globalAppreciation")
     private int globalAppreciation;
 
-    @OneToOne (cascade = CascadeType.ALL)
-    @JoinColumn(name = "employeeId")
-    private Employee employee;
-
+    @JsonIgnore
+    @OneToOne(mappedBy = "evaluation")
+    private OfferCandidate OfferCandidate;
 }
+
 

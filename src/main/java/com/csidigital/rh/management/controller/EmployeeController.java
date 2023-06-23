@@ -1,18 +1,18 @@
 package com.csidigital.rh.management.controller;
-
 import com.csidigital.rh.dao.entity.*;
 import com.csidigital.rh.management.service.impl.EmployeeImpl;
 import com.csidigital.rh.shared.dto.request.EmployeeRequest;
 import com.csidigital.rh.shared.dto.response.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import com.csidigital.rh.dao.entity.Employee;
+import com.csidigital.rh.shared.dto.response.EmployeeResponse;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 
 @RequestMapping("/rh/employee")
 public class EmployeeController {
@@ -70,7 +70,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/add")
-    public EmployeeResponse createEmployee(@Valid @RequestBody EmployeeRequest employeeRequest) {
+    public EmployeeResponse createEmployee(@Valid @RequestBody EmployeeRequest employeeRequest){
         return employeeService.createEmployee(employeeRequest);
     }
 
@@ -91,10 +91,6 @@ public class EmployeeController {
         return employeeService.findByEmployeeStatus();
     }
 
-    @GetMapping("/getAllCandidates")
-    public List<Employee> getAllCandidates() {
-        return employeeService.getAllCandidates();
-    }
 
     @GetMapping("/getAllResourcesBackOffice")
     public List<Employee> getAllResourcesBackOffice() {
@@ -185,3 +181,4 @@ public class EmployeeController {
         return employeeService.getAvailabilityEmployee(id);
     }
 }
+

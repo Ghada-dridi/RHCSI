@@ -22,40 +22,43 @@ public class TechnicalFile{
     private  String reference;
     @Column(name = "description")
     private String description;
+    @Column(name = "title")
+    private String title;
     @Column(name = "objective")
     private String objective;
     @Column(name = "driverLicense")
     private String driverLicense;
-    @Column(name = "experienceAmount")
-    private Long experienceAmount;
+    @Column(name = "nationality")
+    @Enumerated(EnumType.STRING)
+    private Nationality nationality;
 
 
-
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "technicalFile" ,  cascade = CascadeType.ALL)
-    private List<Skills> skills;
 
 
     @JsonIgnore
     @OneToMany(mappedBy = "technicalFile", cascade = CascadeType.ALL)
-    private List<Experience> experiences;
+    private List<Skills> skillsList;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "technicalFile" ,  cascade = CascadeType.ALL)
-    private List<Language> languages;
+    @OneToMany(mappedBy = "technicalFile", cascade = CascadeType.ALL)
+    private List<Experience> experienceList;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "technicalFile" ,  cascade = CascadeType.ALL)
-    private List<Certification> certifications;
+    @OneToMany(mappedBy = "technicalFile", cascade = CascadeType.ALL)
+    private List<Language> languageList;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "technicalFile", cascade = CascadeType.ALL)
+    private List<Certification> certificationList;
 
-    @OneToMany(mappedBy = "technicalFile" , cascade = CascadeType.ALL)
-    private List<Education> educations;
+    @JsonIgnore
+    @OneToMany(mappedBy = "technicalFile", cascade = CascadeType.ALL)
+    private List<Education> educationList;
 
     @OneToOne (
-            cascade = CascadeType.ALL)
-    @JoinColumn(name = "employeeId")
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            mappedBy = "technicalFile")
     private Employee employee;
 
 

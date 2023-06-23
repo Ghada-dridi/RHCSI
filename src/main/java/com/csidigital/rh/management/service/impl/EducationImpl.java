@@ -21,16 +21,16 @@ import java.util.List;
 @AllArgsConstructor
 
 public class EducationImpl implements EducationService {
-    @Autowired
-    private ModelMapper modelMapper ;
-    @Autowired
-    private EducationRepository educationRepository ;
+   @Autowired
+   private ModelMapper modelMapper ;
+   @Autowired
+   private EducationRepository educationRepository ;
 
-    @Autowired
-    private TechnicalFileRepository technicalFileRepository;
+   @Autowired
+   private TechnicalFileRepository technicalFileRepository;
     @Override
     public EducationResponse createEducation(EducationRequest request) {
-        TechnicalFile technicalFile = technicalFileRepository.findById(request.getTechnicalFileNum()).orElseThrow();
+        TechnicalFile technicalFile = technicalFileRepository.findById(request.getTechnicalFileId()).orElseThrow();
         Education education = modelMapper.map(request, Education.class);
         education.setTechnicalFile(technicalFile);
         Education educationSaved = educationRepository.save(education);
@@ -60,18 +60,12 @@ public class EducationImpl implements EducationService {
 
     @Override
     public EducationResponse updateEducation(EducationRequest request, Long id) {
-
-        TechnicalFile technicalFile = technicalFileRepository.findById(request.getTechnicalFileNum()).orElseThrow();
+        TechnicalFile technicalFile = technicalFileRepository.findById(request.getTechnicalFileId()).orElseThrow();
         Education existingEducation = educationRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Education with id: " + id + " not found"));
-        if (request.getTechnicalFileNum() != null) {
-            technicalFile = technicalFileRepository.findById(request.getTechnicalFileNum())
-                    .orElseThrow(() -> new ResourceNotFoundException("TechnicalFile with id: " + request.getTechnicalFileNum() + " not found"));
-        }
         modelMapper.map(request, existingEducation);
-        existingEducation.setTechnicalFile(technicalFile);
         Education savedEducation = educationRepository.save(existingEducation);
-
+        existingEducation.setTechnicalFile(technicalFile);
         return modelMapper.map(savedEducation, EducationResponse.class);
     }
 

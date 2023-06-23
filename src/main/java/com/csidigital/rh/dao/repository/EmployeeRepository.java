@@ -1,5 +1,4 @@
 package com.csidigital.rh.dao.repository;
-
 import com.csidigital.rh.dao.entity.Employee;
 import com.csidigital.rh.shared.enumeration.EmployeeStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,28 +22,9 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     List<Employee> getAllCandidates ();
 
 
-    //Filtrer les Ressources BackOffice
-    @Query(value ="SELECT * FROM employee WHERE resource_type= 'BACKOFFICE_RESOURCE' and employee_status='CONVERTED_TO_RESOURCE'", nativeQuery = true)
-    List<Employee> getAllResourcesBackOffice ();
-
-
-    //Filtrer les Ressources Internes
-    @Query(value ="SELECT * FROM employee WHERE resource_type= 'INTERNAL_RESOURCE' and employee_status='CONVERTED_TO_RESOURCE'", nativeQuery = true)
-    List<Employee> getAllResourcesInterne ();
-
-
-    //Filtrer les Ressources externes
-    @Query(value ="SELECT * FROM employee WHERE resource_type= 'EXTERNAL_RESOURCE' and  employee_status='CONVERTED_TO_RESOURCE'", nativeQuery = true)
-    List<Employee> getAllResourcesExterne();
-
-
     //Filtrer les Ressources interBack
     @Query(value ="SELECT * FROM employee WHERE resource_type= 'INTERNAL_RESOURCE' OR  resource_type= 'BACKOFFICE_RESOURCE' and employee_status='CONVERTED_TO_RESOURCE'", nativeQuery = true)
     List<Employee> getAllInternes();
-
-
-    //filtrer les employés selon leurs status
-    List<Employee> findByEmployeeStatus(EmployeeStatus employeeStatus);
 
 
     @Modifying
@@ -94,5 +74,21 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     List<Employee> getNotConvertedCandidates();
 
 
+
+    //Filtrer les Ressources BackOffice
+    @Query(value ="SELECT * FROM employee WHERE dtype= 'BackOffice'", nativeQuery = true)
+    List<Employee> getAllResourcesBackOffice ();
+
+    //Filtrer les Ressources Internes
+    @Query(value ="SELECT * FROM employee WHERE dtype= 'Resource'", nativeQuery = true)
+    List<Employee> getAllResourcesInterne ();
+
+    //Filtrer les Ressources externes
+    @Query(value ="SELECT * FROM employee WHERE dtype= 'ExternalResource'", nativeQuery = true)
+    List<Employee> getAllResourcesExterne();
+
+
+    //filtrer les employés selon leurs status
+    List<Employee> findByEmployeeStatus(EmployeeStatus employeeStatus);
 
 }

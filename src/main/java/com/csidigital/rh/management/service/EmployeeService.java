@@ -16,7 +16,9 @@ public interface EmployeeService {
     EmployeeResponse getEmployeeById(Long id);
 
     EmployeeResponse updateEmployee(EmployeeRequest request, Long id);
-
+    boolean hasAdministrativeData(Long employeeId);
+    void deleteEmployee(Long id);
+    AdministrativeDataResponse getEmployeeAdministartiveData(Long id);
    // void deleteEmployee(Long id);
 
     TechnicalFileResponse getEmployeeTechnicalFile(Long id);

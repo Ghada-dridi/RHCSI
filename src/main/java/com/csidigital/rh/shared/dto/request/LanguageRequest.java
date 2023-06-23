@@ -1,6 +1,5 @@
 package com.csidigital.rh.shared.dto.request;
 
-import com.csidigital.rh.shared.enumeration.LanguageLevel;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import lombok.Data;
@@ -12,7 +11,6 @@ public class LanguageRequest {
 
     private Long Id;
     private com.csidigital.rh.shared.enumeration.Language language;
-    private LanguageLevel languageLevel;
     private String additionalInformation;
-    private Long technicalFileNum ;
+    private Long technicalFileId ;
 }

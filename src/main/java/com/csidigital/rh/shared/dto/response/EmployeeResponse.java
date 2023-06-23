@@ -1,23 +1,30 @@
 package com.csidigital.rh.shared.dto.response;
 
+
 import com.csidigital.rh.dao.entity.*;
 import com.csidigital.rh.dao.entity.Availability;
 import com.csidigital.rh.shared.enumeration.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+
 import java.util.Set;
 
 @Data
 public class EmployeeResponse {
+
     private Long Id;
+
     private String lastName;
     private String firstName;
     private Civility civility;
     private Title title;
+    private EmployeeType employeeType;
 
     private LocalDate birthDate;
     private String emailOne;
@@ -27,6 +34,7 @@ public class EmployeeResponse {
     private String address;
     private Integer postCode;
     private String city;
+
     private String country;
     @Enumerated(EnumType.STRING)
     private ResourceType resourceType;
@@ -35,6 +43,7 @@ public class EmployeeResponse {
     private Integer recommendationMark ;
     private Integer experience ;
     private String experienceDetails ;
+
 
     private EmployeeStatus employeeStatus;
 
@@ -68,5 +77,12 @@ public class EmployeeResponse {
     private List<Equipment> equipmentList;
     private List<Availability> availabilityList;
 
+
+    @Enumerated(EnumType.STRING)
+    private Provenance provenance;
+    private String employeeFirstName;
+    private String employeeLastName;
+    private String EmployeeSerialNumber;
+    private Set<Long> offer;
 
 }

@@ -3,7 +3,6 @@ package com.csidigital.rh.dao.entity;
 import com.csidigital.rh.shared.enumeration.AvailabilityEnum;
 import com.csidigital.rh.shared.enumeration.ContractType;
 import com.csidigital.rh.shared.enumeration.Experience;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,14 +33,5 @@ public class AdministrativeData {
     @Enumerated(EnumType.STRING)
     @Column(name = "experience")
     private Experience experience;
-
-
-
-    @JsonIgnore
-    @OneToOne (
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
-    @JoinColumn(name = "employeeId")
-    private Employee employee;
 
 }

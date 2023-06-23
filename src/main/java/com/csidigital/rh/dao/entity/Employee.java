@@ -22,11 +22,16 @@ public class Employee {
 
     private String lastName;
     @Column(name = "firstName")
+
     private String firstName;
+
     @Enumerated(EnumType.STRING)
     private Civility civility;
     @Enumerated(EnumType.STRING)
     private Title title;
+
+    @Enumerated(EnumType.STRING)
+    private EmployeeType employeeType;
 
     private LocalDate birthDate;
     private String emailOne;
@@ -37,9 +42,12 @@ public class Employee {
     private Integer postCode;
     private String city;
 
+
     private String country;
+
     @Enumerated(EnumType.STRING)
     private MaritalSituation maritalSituation;
+
     private Integer recommendationMark ;
     private Integer experience ;
     private String experienceDetails ;
@@ -50,6 +58,7 @@ public class Employee {
     private String serialNumber;
 
 
+
     @Enumerated(EnumType.STRING)
     private WorkLocation workLocation;
 
@@ -57,10 +66,12 @@ public class Employee {
     @Enumerated(EnumType.STRING)
     private Departement departement;
 
+
     @Enumerated(EnumType.STRING)
     private ResourceType resourceType;
 
     @JsonIgnore
+
     @OneToOne(cascade = CascadeType.ALL,
             mappedBy = "employee")
     private TechnicalFile technicalFile;
@@ -68,12 +79,12 @@ public class Employee {
     @OneToMany(mappedBy = "employee" ,cascade = CascadeType.ALL)
     private List<OfferCandidate> offerCandidateList;
     @JsonIgnore
+
     @OneToOne(mappedBy = "employee")
     private AdministrativeData administrativeData;
     @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL,
-            mappedBy = "employee")
-    private Evaluation evaluation;
+    @OneToMany(mappedBy = "employee" , cascade = CascadeType.ALL)
+    private List<Evaluation> evaluation;
 
 
 //-------------attributs ResourceInterne--------------------------
@@ -88,7 +99,7 @@ public class Employee {
     private LocalDate recruitmentDate;
     private Boolean isEmployee;
 
-//relation  oneTomany avec contract
+
     @OneToMany(mappedBy = "employee")
     private List<Contract> contractsList;
 
@@ -105,9 +116,8 @@ public class Employee {
         inverseJoinColumns = @JoinColumn(name = "equipment_id")
 )
 private List<Equipment> equipmentList;
-
-
-
-
-
 }
+
+
+
+

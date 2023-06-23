@@ -1,14 +1,12 @@
 package com.csidigital.rh.management.service.impl;
 
 import com.csidigital.rh.dao.entity.Certification;
-import com.csidigital.rh.dao.entity.Education;
 import com.csidigital.rh.dao.entity.TechnicalFile;
 import com.csidigital.rh.dao.repository.CertificationRepository;
 import com.csidigital.rh.dao.repository.TechnicalFileRepository;
 import com.csidigital.rh.management.service.CertificationService;
 import com.csidigital.rh.shared.dto.request.CertificationRequest;
 import com.csidigital.rh.shared.dto.response.CertificationResponse;
-import com.csidigital.rh.shared.dto.response.EducationResponse;
 import com.csidigital.rh.shared.exception.ResourceNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -32,7 +30,7 @@ public class CertificationImpl implements CertificationService {
 
     @Override
     public CertificationResponse createCertification(CertificationRequest request) {
-        TechnicalFile technicalFile = technicalFileRepository.findById(request.getTechnicalFileNum()).orElseThrow();
+        TechnicalFile technicalFile = technicalFileRepository.findById(request.getTechnicalFileId()).orElseThrow();
         Certification certification = modelMapper.map(request, Certification.class);
         certification.setTechnicalFile(technicalFile);
         Certification certificationSaved = certificationRepository.save(certification);
@@ -62,7 +60,7 @@ public class CertificationImpl implements CertificationService {
 
     @Override
     public CertificationResponse updateCertification(CertificationRequest request, Long id) {
-        TechnicalFile technicalFile = technicalFileRepository.findById(request.getTechnicalFileNum())
+        TechnicalFile technicalFile = technicalFileRepository.findById(request.getTechnicalFileId())
                 .orElseThrow(/*() -> new ResourceNotFoundException("Technical File not found with id " + technicalFileId)*/);
         Certification existingCertification = certificationRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Certification with id: " + id + " not found"));

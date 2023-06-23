@@ -1,4 +1,5 @@
 package com.csidigital.rh.dao.entity;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,17 +16,16 @@ public class Skills {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long Id;
-    @Column(name = "skillsTitle")
-    private String skillsTitle;
+    @Column(name = "title")
+    private String title;
 
 
-    @ManyToOne(  )
     @JsonIgnore
+    @ManyToOne
     @JoinColumn(name = "technicalFileId")
     private TechnicalFile technicalFile;
 
-
-  /*  @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "skillsCategoryId")
     private SkillsCategory skillsCategory;*/
 }

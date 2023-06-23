@@ -17,6 +17,8 @@ public class AssQuestionInterview {
     @Column(name = "mark")
     private Integer mark;
 
+
+
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_question")

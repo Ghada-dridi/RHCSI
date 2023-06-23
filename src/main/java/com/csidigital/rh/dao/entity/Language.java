@@ -1,6 +1,5 @@
 package com.csidigital.rh.dao.entity;
 
-import com.csidigital.rh.shared.enumeration.LanguageLevel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -19,10 +18,12 @@ public class Language implements Serializable {
     @Enumerated(EnumType.STRING)
     private com.csidigital.rh.shared.enumeration.Language language;
     private String additionalInformation;
-    @Enumerated(EnumType.STRING)
-    private LanguageLevel languageLevel;
-    @ManyToOne( )
+
+
     @JsonIgnore
+    @ManyToOne
     @JoinColumn(name = "technicalFileId")
     private TechnicalFile technicalFile;
 }
+
+

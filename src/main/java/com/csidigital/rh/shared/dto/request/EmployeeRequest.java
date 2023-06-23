@@ -12,12 +12,15 @@ import lombok.Data;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.csidigital.rh.dao.entity.TechnicalFile;
+
 @Data
 public class EmployeeRequest {
     private String lastName;
     private String firstName;
     private Civility civility;
     private Title title;
+    private EmployeeType employeeType;
 
     private LocalDate birthDate;
     private String emailOne;
@@ -27,7 +30,9 @@ public class EmployeeRequest {
     private String address;
     private Integer postCode;
     private String city;
+
     private String country;
+
     private MaritalSituation maritalSituation;
     private Integer recommendationMark ;
     private Integer experience ;
@@ -41,6 +46,8 @@ public class EmployeeRequest {
     private String employeeLastName;
     private String EmployeeSerialNumber;
     private List<OfferCandidate> AssOfferCandidateList;
+
+    private Long AssOfferCandidateId;
 
     private EmployeeStatus employeeStatus;
     private Departement departement;
@@ -72,5 +79,5 @@ public class EmployeeRequest {
      private List<Availability> availabilityList;
 
 
-
 }
+
