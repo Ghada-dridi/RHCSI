@@ -60,12 +60,18 @@ public class EducationImpl implements EducationService {
 
     @Override
     public EducationResponse updateEducation(EducationRequest request, Long id) {
+
         TechnicalFile technicalFile = technicalFileRepository.findById(request.getTechnicalFileNum()).orElseThrow();
         Education existingEducation = educationRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Education with id: " + id + " not found"));
+        if (request.getTechnicalFileNum() != null) {
+            technicalFile = technicalFileRepository.findById(request.getTechnicalFileNum())
+                    .orElseThrow(() -> new ResourceNotFoundException("TechnicalFile with id: " + request.getTechnicalFileNum() + " not found"));
+        }
         modelMapper.map(request, existingEducation);
-        Education savedEducation = educationRepository.save(existingEducation);
         existingEducation.setTechnicalFile(technicalFile);
+        Education savedEducation = educationRepository.save(existingEducation);
+
         return modelMapper.map(savedEducation, EducationResponse.class);
     }
 

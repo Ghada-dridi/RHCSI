@@ -1,5 +1,6 @@
 package com.csidigital.rh.management.controller;
 
+import com.csidigital.rh.dao.entity.ArticleUpdated;
 import com.csidigital.rh.dao.entity.BenefitRC;
 import com.csidigital.rh.dao.entity.Employee;
 import com.csidigital.rh.dao.entity.ExceptionalFee;
@@ -75,5 +76,9 @@ public class ContractController {
     void updateStatusToSentById(@PathVariable Long id){
 
         contract.updateStatusToSentById(id);
+    }
+    @GetMapping("/getArticleContractById/{id}")
+    public List<ArticleUpdated> getArticleContractById(@PathVariable Long id){
+      return  contract.getArticleContractById(id);
     }
 }

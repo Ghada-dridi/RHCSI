@@ -1,10 +1,9 @@
 package com.csidigital.rh.management.service;
 
-import com.csidigital.rh.dao.entity.Employee;
+import com.csidigital.rh.dao.entity.*;
 import com.csidigital.rh.shared.dto.request.EmployeeRequest;
 import com.csidigital.rh.shared.dto.response.EmployeeResponse;
 
-import com.csidigital.rh.dao.entity.OfferCandidate;
 import com.csidigital.rh.shared.dto.request.EmployeeRequest;
 import com.csidigital.rh.shared.dto.response.*;
 
@@ -18,7 +17,7 @@ public interface EmployeeService {
 
     EmployeeResponse updateEmployee(EmployeeRequest request, Long id);
 
-    void deleteEmployee(Long id);
+   // void deleteEmployee(Long id);
 
     TechnicalFileResponse getEmployeeTechnicalFile(Long id);
 
@@ -39,6 +38,7 @@ public interface EmployeeService {
     List<Employee> getAllResourcesInterne ();
 
     List<Employee> getAllResourcesExterne();
+    List<Employee> getAllInternes();
 
     List<AssOfferCandidateResponse> getOfferCandidates(Long id);
     void updateStatusToInProcessById (Long id);
@@ -49,6 +49,10 @@ public interface EmployeeService {
     void  updateStatusToDoNotContactById(Long id);
     void updateStatusToArchiveById (Long id);
 
+    List<Employee>  getConvertedCandidates();
+    List<Employee> getNotConvertedCandidates();
+    public List<Contract> getContractsEmployee(Long id);
 
+    public List<Availability> getAvailabilityEmployee(Long id);
 }
 

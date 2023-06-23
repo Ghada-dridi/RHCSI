@@ -13,4 +13,7 @@ public class AvailabilityResponse {
     private LocalDate startDate;
     private LocalDate endDate;
     private Integer period;
+    private String comment;
+    private Long employeeNum;
+
 }

@@ -20,4 +20,5 @@ public class TechnicalFileRequest {
     private List<Certification> certifications;
     private List<Education> educations;
     private Long employeeNum;
+    private Long experienceAmount;
 }

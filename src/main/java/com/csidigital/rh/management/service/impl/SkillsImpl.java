@@ -37,10 +37,8 @@ public class SkillsImpl implements SkillsService {
     @Override
     public SkillsResponse createSkills(SkillsRequest request) {
         TechnicalFile technicalFile= technicalFileRepository.findById(request.getTechnicalFileNum()).orElseThrow();
-
         Skills skills= modelMapper.map(request, Skills.class);
         skills.setTechnicalFile(technicalFile);
-
         Skills skillsSaved = skillsRepository.save(skills);
         return modelMapper.map(skillsSaved, SkillsResponse.class);
     }

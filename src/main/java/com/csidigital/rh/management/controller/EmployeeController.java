@@ -1,34 +1,36 @@
 package com.csidigital.rh.management.controller;
 
-import com.csidigital.rh.dao.entity.Employee;
+import com.csidigital.rh.dao.entity.*;
 import com.csidigital.rh.management.service.impl.EmployeeImpl;
 import com.csidigital.rh.shared.dto.request.EmployeeRequest;
 import com.csidigital.rh.shared.dto.response.*;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:4200")
+
 @RequestMapping("/rh/employee")
 public class EmployeeController {
     @Autowired
     private EmployeeImpl employeeService;
+
     @Autowired
     public EmployeeController(EmployeeImpl employeeService) {
         this.employeeService = employeeService;
     }
+
     @GetMapping("/getEmployees")
     public List<EmployeeResponse> getAllEmployees() {
         return employeeService.getAllEmployees();
     }
 
     @GetMapping("/get/{id}")
-    public EmployeeResponse getEmployeeById(@PathVariable Long id){
+    public EmployeeResponse getEmployeeById(@PathVariable Long id) {
         return employeeService.getEmployeeById(id);
     }
 
@@ -68,40 +70,60 @@ public class EmployeeController {
     }
 
     @PostMapping("/add")
-    public EmployeeResponse createEmployee(@Valid @RequestBody EmployeeRequest employeeRequest){
+    public EmployeeResponse createEmployee(@Valid @RequestBody EmployeeRequest employeeRequest) {
         return employeeService.createEmployee(employeeRequest);
     }
 
     @PutMapping("/update/{id}")
     public EmployeeResponse updateEmployee(@Valid @RequestBody EmployeeRequest employeeRequest,
-                                         @PathVariable Long id){
+                                           @PathVariable Long id) {
         return employeeService.updateEmployee(employeeRequest, id);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public void deleteEmployee(@PathVariable Long id){
-        employeeService.deleteEmployee(id);
-    }
-@GetMapping("/testV1")
-    public List<Employee> getEmployee(){
+    /*
+        @DeleteMapping("/delete/{id}")
+        public void deleteEmployee(@PathVariable Long id) {
+            employeeService.deleteEmployee(id);
+        }
+    */
+    @GetMapping("/testV1")
+    public List<Employee> getEmployee() {
         return employeeService.findByEmployeeStatus();
-}
+    }
 
-@GetMapping("/getAllCandidates")
-    public List<Employee> getAllCandidates(){
+    @GetMapping("/getAllCandidates")
+    public List<Employee> getAllCandidates() {
         return employeeService.getAllCandidates();
-}
+    }
+
     @GetMapping("/getAllResourcesBackOffice")
-    public List<Employee> getAllResourcesBackOffice(){
+    public List<Employee> getAllResourcesBackOffice() {
         return employeeService.getAllResourcesBackOffice();
     }
+
     @GetMapping("/getAllResourcesInterne")
-    public List<Employee> getAllResourcesInterne(){
+    public List<Employee> getAllResourcesInterne() {
         return employeeService.getAllResourcesInterne();
     }
+
     @GetMapping("/getAllResourcesExterne")
-    public List<Employee> getAllResourcesExterne(){
+    public List<Employee> getAllResourcesExterne() {
         return employeeService.getAllResourcesExterne();
+    }
+
+    @GetMapping("/getAllInternes")
+    public List<Employee> getAllInternes() {
+        return employeeService.getAllInternes();
+    }
+
+    @GetMapping("/getAllEmployees")
+    public List<Employee> getConvertedCandidates() {
+        return employeeService.getConvertedCandidates();
+    }
+
+    @GetMapping("/getAllNotConverted")
+    public List<Employee> getNotConvertedCandidates() {
+        return employeeService.getNotConvertedCandidates();
     }
 
 
@@ -139,5 +161,27 @@ public class EmployeeController {
     void updateStatusToArchiveById(@PathVariable Long id) {
         employeeService.updateStatusToArchiveById(id);
     }
-}
 
+/*
+    @PostMapping("/{id}/assignEquipment/{equipmentId}")
+    public ResponseEntity<String> assignEquipmentToEmployee(
+            @PathVariable Long employeeId,
+            @PathVariable Long equipmentId
+    ) {
+        try {
+            employeeService.assignEquipmentToEmployee(equipmentId, employeeId);
+            return ResponseEntity.ok("Equipment assigned to employee successfully.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("Invalid employee ID or equipment ID.");
+        }
+    }*/
+
+    @GetMapping("/{id}/getContractsEmployee")
+    public List<Contract> getContractsEmployee(@PathVariable Long id) {
+        return employeeService.getContractsEmployee(id);
+    }
+    @GetMapping("/{id}/getAvailabilityEmployee")
+    public List<Availability> getAvailabilityEmployee(@PathVariable Long id) {
+        return employeeService.getAvailabilityEmployee(id);
+    }
+}

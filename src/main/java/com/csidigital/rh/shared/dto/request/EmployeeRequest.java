@@ -1,19 +1,16 @@
 package com.csidigital.rh.shared.dto.request;
 
-import com.csidigital.rh.dao.entity.AdministrativeData;
-import com.csidigital.rh.dao.entity.Contract;
-import com.csidigital.rh.dao.entity.OfferCandidate;
-
-import com.csidigital.rh.dao.entity.TechnicalFile;
+import com.csidigital.rh.dao.entity.*;
+import com.csidigital.rh.dao.entity.Availability;
 import com.csidigital.rh.shared.enumeration.*;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 import java.time.LocalDate;
-
 import java.util.List;
-
 
 @Data
 public class EmployeeRequest {
@@ -21,7 +18,7 @@ public class EmployeeRequest {
     private String firstName;
     private Civility civility;
     private Title title;
-    private EmployeeType employeeType;
+
     private LocalDate birthDate;
     private String emailOne;
     private String emailTwo;
@@ -30,49 +27,50 @@ public class EmployeeRequest {
     private String address;
     private Integer postCode;
     private String city;
-
     private String country;
     private MaritalSituation maritalSituation;
     private Integer recommendationMark ;
     private Integer experience ;
     private String experienceDetails ;
-    private String socialSecurityNumber;
-    private String bankAccountNumber;
-
-    private String photo;
-    private String serialNumber;
-    private Double leaveBalanceRest;
-    private Double leaveBalance;
-    private Long productivity;
-    private String nationalIdentity;
-    private LocalDate recruitmentDate;
-
-    private Boolean isEmployee;
     @Enumerated(EnumType.STRING)
     private WorkLocation workLocation;
-
-    private String locationName;
-
 
     @Enumerated(EnumType.STRING)
     private Provenance provenance;
     private String employeeFirstName;
     private String employeeLastName;
     private String EmployeeSerialNumber;
-
-    private Long AssOfferCandidateId;
-
     private List<OfferCandidate> AssOfferCandidateList;
-
 
     private EmployeeStatus employeeStatus;
     private Departement departement;
     private TechnicalFile technicalFile ;
-
     private AdministrativeData administrativeData;
-    private List<Contract> contractsList;
+    private Evaluation evaluation;
     @Enumerated(EnumType.STRING)
     private ResourceType resourceType;
 
-}
+    //--------------attributs ResourceInterne------------------
+    private String socialSecurityNumber;
+    private String bankAccountNumber;
+    @Lob
+    private String  photo;
+    private double leaveBalanceRest;
+    private double leaveBalance;
+    private Long productivity;
+    private String nationalIdentity;
+    private LocalDate recruitmentDate;
+    private Boolean isEmployee;
 
+    @OneToMany(mappedBy = "employee")
+    private List<Contract> contractsList;
+
+    //----------attributs ResourceExterne--------------
+    private String serialNumber;
+
+    private List<Equipment> equipmentList;
+     private List<Availability> availabilityList;
+
+
+
+}

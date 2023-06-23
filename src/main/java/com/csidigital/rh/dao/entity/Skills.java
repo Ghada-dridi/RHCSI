@@ -1,5 +1,4 @@
 package com.csidigital.rh.dao.entity;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,7 +19,7 @@ public class Skills {
     private String skillsTitle;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(  )
     @JsonIgnore
     @JoinColumn(name = "technicalFileId")
     private TechnicalFile technicalFile;

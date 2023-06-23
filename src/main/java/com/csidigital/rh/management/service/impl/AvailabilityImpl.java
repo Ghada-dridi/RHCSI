@@ -1,7 +1,9 @@
 package com.csidigital.rh.management.service.impl;
 
 import com.csidigital.rh.dao.entity.Availability;
+import com.csidigital.rh.dao.entity.Employee;
 import com.csidigital.rh.dao.repository.AvailabilityRepository;
+import com.csidigital.rh.dao.repository.EmployeeRepository;
 import com.csidigital.rh.management.service.AvailabilityService;
 import com.csidigital.rh.shared.dto.request.AvailabilityRequest;
 import com.csidigital.rh.shared.dto.response.AvailabilityResponse;
@@ -24,11 +26,15 @@ public class AvailabilityImpl implements AvailabilityService {
     @Autowired
     private AvailabilityRepository availabilityRepository ;
     @Autowired
+    private EmployeeRepository employeeRepository;
+    @Autowired
     private ModelMapper modelMapper;
 
     @Override
     public AvailabilityResponse createAvailability(AvailabilityRequest request) {
+        Employee employee = employeeRepository.findById(request.getEmployeeNum()).orElseThrow();
         Availability availability = modelMapper.map(request, Availability.class);
+        availability.setEmployee(employee);
         Availability AvailabilitySaved = availabilityRepository.save(availability);
         return modelMapper.map(AvailabilitySaved, AvailabilityResponse.class);
     }

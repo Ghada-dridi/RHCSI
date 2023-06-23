@@ -3,6 +3,7 @@ package com.csidigital.rh.management.service.impl;
 import com.csidigital.rh.dao.entity.*;
 import com.csidigital.rh.dao.repository.EmployeeReferenceSequenceRepository;
 import com.csidigital.rh.dao.repository.EmployeeRepository;
+import com.csidigital.rh.dao.repository.EquipmentRepository;
 import com.csidigital.rh.management.service.EmployeeService;
 import com.csidigital.rh.shared.dto.request.EmployeeRequest;
 
@@ -30,6 +31,9 @@ public class EmployeeImpl implements EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository ;
 
+
+    @Autowired
+    private EquipmentRepository equipmentRepository ;
     @Autowired
     private ModelMapper modelMapper ;
 
@@ -40,17 +44,7 @@ public class EmployeeImpl implements EmployeeService {
 
     @Override
     public EmployeeResponse createEmployee(EmployeeRequest request) {
-
         Employee employee = modelMapper.map(request, Employee.class);
-
-       /* if (employee instanceof BackOffice || employee instanceof Resource) {
-            String code = employeeSerialNumberGenerator();
-            employee.setSerialNumber(code);
-        }
-        else {
-            employee.setSerialNumber(null);
-        }*/
-
         Employee employeeSaved = employeeRepository.save(employee);
         return modelMapper.map(employeeSaved, EmployeeResponse.class);
 
@@ -78,7 +72,30 @@ public class EmployeeImpl implements EmployeeService {
         EmployeeResponse employeeResponse = modelMapper.map(employee, EmployeeResponse.class);
         return employeeResponse;
     }
+    @Override
+    public EmployeeResponse updateEmployee(EmployeeRequest request, Long id) {
+        Employee existingEmployee = employeeRepository.findById(id)
+                .orElseThrow(()-> new ResourceNotFoundException("Employee with id: " + id + " not found"));
+        modelMapper.map(request, existingEmployee);
+        Employee savedEmployee = employeeRepository.save(existingEmployee);
+        return modelMapper.map(savedEmployee, EmployeeResponse.class);
+    }
+    /*
+    @Override
+    public void deleteEmployee(Long id) {
+    Employee employee = employeeRepository.findById(id).orElseThrow();
+    List<Equipment> equipment = employee.getEquipmentList();
+    for(Equipment eq : equipment) {
+        eq.setEmployee(null);
+        equipmentRepository.save(eq);
+    }
 
+
+        employeeRepository.deleteById(id);
+    }
+*/
+
+    // La méthode Get technical file
     @Override
     public TechnicalFileResponse getEmployeeTechnicalFile(Long id) {
         Employee employee = employeeRepository.findById(id)
@@ -89,6 +106,7 @@ public class EmployeeImpl implements EmployeeService {
     }
 
 
+    // La méthode Get Education Employee
     @Override
     public List<EducationResponse> getEmployeeEducation(Long id) {
         Employee employee = employeeRepository.findById(id)
@@ -103,6 +121,7 @@ public class EmployeeImpl implements EmployeeService {
         return educationResponseList ;
     }
 
+    // La méthode Get Expérience Employee
     @Override
     public List<ExperienceResponse> getEmployeeExperience(Long id) {
         Employee employee = employeeRepository.findById(id)
@@ -119,6 +138,8 @@ public class EmployeeImpl implements EmployeeService {
         return experienceResponseList ;
     }
 
+
+    // La méthode Get Certification Employee
     @Override
     public List<CertificationResponse> getEmployeeCertification(Long id) {
         Employee employee = employeeRepository.findById(id)
@@ -134,6 +155,8 @@ public class EmployeeImpl implements EmployeeService {
         return certificationResponseList ;
     }
 
+
+    // La méthode Get language  Employee
     @Override
     public List<LanguageResponse> getEmployeeLanguage(Long id) {
         Employee employee = employeeRepository.findById(id)
@@ -149,6 +172,8 @@ public class EmployeeImpl implements EmployeeService {
         return languageResponseList ;
     }
 
+
+    // La méthode Get compétences Employee
     @Override
     public List<SkillsResponse> getEmployeeSkills(Long id) {
         Employee employee = employeeRepository.findById(id)
@@ -163,6 +188,8 @@ public class EmployeeImpl implements EmployeeService {
         }
         return skillsResponseList ;
     }
+
+    // La méthode Get Offre Employee
     @Override
     public List<AssOfferCandidateResponse> getOfferCandidates(Long id) {
         Employee employee = employeeRepository.findById(id)
@@ -176,6 +203,7 @@ public class EmployeeImpl implements EmployeeService {
         return assOfferCandidateResponseList ;
     }
 
+    // Les méthodes du changement de status
     @Override
     public void updateStatusToInProcessById(Long id) {
 
@@ -202,6 +230,17 @@ public class EmployeeImpl implements EmployeeService {
 
     @Override
     public void updateStatusToConvertedToResourceById(Long id) {
+       Employee employee = employeeRepository.findById(id).orElseThrow();
+        EmployeeReferenceSequence sequence = employeeReferenceSequenceRepository.findById(1L)
+                .orElse(null) ;
+        if (sequence == null) {
+            sequence = new EmployeeReferenceSequence();
+            sequence = employeeReferenceSequenceRepository.save(sequence);
+        }
+        String employeeReference = String.format("M_%04d", sequence.getNextValue());
+        sequence.incrementNextValue();
+        employeeReferenceSequenceRepository.save(sequence);
+        employee.setSerialNumber(employeeReference);
         employeeRepository.updateStatusToConvertedToResourceById(id);
     }
 
@@ -217,48 +256,15 @@ public class EmployeeImpl implements EmployeeService {
         employeeRepository.updateStatusToArchiveById(id);
     }
 
-
     @Override
-    public EmployeeResponse updateEmployee(EmployeeRequest request, Long id) {
-        Employee existingEmployee = employeeRepository.findById(id)
-                .orElseThrow(()-> new ResourceNotFoundException("Employee with id: " + id + " not found"));
-        modelMapper.map(request, existingEmployee);
-        Employee savedEmployee = employeeRepository.save(existingEmployee);
-        return modelMapper.map(savedEmployee, EmployeeResponse.class);
+    public List<Employee> getConvertedCandidates() {
+       return employeeRepository.getConvertedCandidates();
     }
 
     @Override
-
-    public void deleteEmployee(Long id) {
-       employeeRepository.deleteById(id);
+    public List<Employee> getNotConvertedCandidates() {
+        return  employeeRepository.getNotConvertedCandidates();
     }
-
-
-
-
-//
-//    @Override
-//    public String employeeSerialNumberGenerator() {
-//        String lastCode = employeeRepository.resourceLastCode();
-//        if (lastCode == null) {
-//            return "E_0001";
-//        }
-//        Integer codeNumber = Integer.parseInt(lastCode.substring(2));
-//
-//        if (codeNumber < 10000) {
-//            codeNumber= codeNumber+Integer.parseInt(String.format("%04d", 1));
-//        }
-//        String numbers= codeNumber.toString();
-//        if (numbers.length()<4){
-//            for(int i=0;i<3;i++){
-//                numbers='0'+ numbers;
-//            }
-//
-//        }
-//        return "E_" + numbers;
-//    }
-
-
 
 
     @Override
@@ -293,23 +299,61 @@ public class EmployeeImpl implements EmployeeService {
         return employeeRepository.getAllCandidates();
     }
 
+
+    // Méthode Get tous les BackOffices
     @Override
     public List<Employee> getAllResourcesBackOffice() {
         return employeeRepository.getAllResourcesBackOffice();
     }
 
+
+    // Méthode Get tous les Internes
     @Override
     public List<Employee> getAllResourcesInterne() {
         return employeeRepository.getAllResourcesInterne();
     }
 
+
+    // Méthode Get tous les Externes
     @Override
     public List<Employee> getAllResourcesExterne() {
         return employeeRepository.getAllResourcesExterne();
     }
 
+    @Override
+    public List<Employee> getAllInternes() {
+        return employeeRepository.getAllInternes();
+    }
+    @Override
+    public List<Contract> getContractsEmployee(Long id) {
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Contract with id " + id + " not found"));
+        List<Contract> contract = employee.getContractsList();
 
+        return contract;
+    }
 
+    @Override
+    public List<Availability> getAvailabilityEmployee(Long id) {
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Contract with id " + id + " not found"));
+        List<Availability> availabilityList = employee.getAvailabilityList();
+
+        return availabilityList;
+    }
+
+/*
+    public void assignEquipmentToEmployee(Long equipmentId, Long employeeId) {
+        Equipment equipment = equipmentRepository.findById(equipmentId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid equipment ID"));
+
+        Employee employee = employeeRepository.findById(employeeId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid employee ID"));
+
+        equipment.setEmployee(employee);
+        equipmentRepository.save(equipment);
+    }
+*/
 
 }
 

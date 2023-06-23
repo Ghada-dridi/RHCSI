@@ -12,6 +12,6 @@ public class ArticleRequest {
     private String articleTitle;
     private String description;
 
-    private Long contractId;
+
 
 }

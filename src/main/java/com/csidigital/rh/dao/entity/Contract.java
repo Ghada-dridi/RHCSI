@@ -41,17 +41,21 @@ public class Contract {
     @Enumerated(EnumType.STRING)
     private Status contractStatus;
 
-    @Column(name = "contractIntroduction", length = 10000)
-    private String contractIntroduction;
+    @Column(name = "contractEmployer", length = 10000)
+    private String contractEmployer;
+    @Column(name = "contractEmployee", length = 10000)
+    private String contractEmployee;
     @JsonIgnore
     @ManyToOne @JoinColumn(name = "id_employee")
     private Employee employee;
+    private  String reference;
 
-
-   // @JsonIgnore
     @OneToMany(mappedBy = "contract" )
     private List<ArticleUpdated> articles = new ArrayList<ArticleUpdated>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL)
+    private List<Endorsement> endorsementList;
 
     @JsonIgnore
     @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL)

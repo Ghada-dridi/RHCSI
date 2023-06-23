@@ -16,5 +16,5 @@ public class ArticleResponse {
 
     private String articleTitle;
     private String description;
-    private List<Contract> contracts;
+
 }

@@ -1,8 +1,8 @@
 package com.csidigital.rh.shared.dto.response;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.csidigital.rh.dao.entity.Employee;
+import com.csidigital.rh.shared.enumeration.*;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -13,10 +13,31 @@ public class EquipmentResponse {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String serialNumber;
+    private String reference;
     private String type;
-    private String resource;
-    private LocalDate deliveryDate;
+    private String designation;
+    private LocalDate acquisitionDate;
+    private LocalDate endDate;
+    private Double purchasePrise;
     private String comment;
-    private LocalDate returnDate;
+    private String supplier;
+    private Boolean amortizable;
+
+    private Boolean affectable;
+    @Enumerated(EnumType.STRING)
+    private Affectation affectation;
+    @Enumerated(EnumType.STRING)
+    private PurchaseMethod purchaseMethod;
+    @Enumerated(EnumType.STRING)
+    private AmortizationType amortizationType;
+
+    private Currency currency;
+    @Enumerated(EnumType.STRING)
+    private StatusDisponibility status;
+
+    private String motifUnavailability;
+    private LocalDate disponibilityDate;
+
+
 
 }

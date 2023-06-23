@@ -21,6 +21,7 @@ public class ArticleController {
 
     @GetMapping("/getArticles")
     public List<ArticleResponse> getAllArticles() {
+
         return articleService.getAllArticles();
     }
 

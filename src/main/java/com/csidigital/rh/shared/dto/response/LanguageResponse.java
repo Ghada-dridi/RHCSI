@@ -1,15 +1,11 @@
 package com.csidigital.rh.shared.dto.response;
 import com.csidigital.rh.shared.enumeration.LanguageLevel;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import lombok.Data;
 @Data
 public class LanguageResponse {
 
-
-    private Long Id;
-    private String language;
+    private com.csidigital.rh.shared.enumeration.Language language;
     private LanguageLevel languageLevel;
     private String additionalInformation;
-    private Long technicalFileId ;
+    private Long technicalFileId;
 }

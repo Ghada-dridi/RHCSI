@@ -32,7 +32,7 @@ public class EducationController {
 
     @PutMapping("/update/{id}")
     public EducationResponse updateEducation(@Valid @RequestBody EducationRequest educationRequest,
-                                         @PathVariable Long id){
+                                             @PathVariable Long id){
         return EducationService.updateEducation(educationRequest, id);
     }
 

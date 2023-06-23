@@ -1,8 +1,6 @@
 package com.csidigital.rh.management.service;
 
-import com.csidigital.rh.shared.dto.request.BackOfficeRequest;
 import com.csidigital.rh.shared.dto.request.CandidateRequest;
-import com.csidigital.rh.shared.dto.response.BackOfficeResponse;
 import com.csidigital.rh.shared.dto.response.CandidateResponse;
 
 import java.util.List;

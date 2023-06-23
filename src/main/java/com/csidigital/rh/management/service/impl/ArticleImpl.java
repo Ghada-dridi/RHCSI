@@ -3,7 +3,6 @@ package com.csidigital.rh.management.service.impl;
 import com.csidigital.rh.dao.entity.Article;
 
 import com.csidigital.rh.dao.entity.Contract;
-import com.csidigital.rh.dao.entity.Resource;
 import com.csidigital.rh.dao.repository.ArticleRepository;
 import com.csidigital.rh.dao.repository.ContractRepository;
 import com.csidigital.rh.management.service.ArticleService;
@@ -34,10 +33,10 @@ public class ArticleImpl implements ArticleService {
 
     @Override
     public ArticleResponse createArticle (ArticleRequest request) {
-        Contract contract = null;
+     /*   Contract contract = null;
         if (request.getContractId() != null) {
             contract = contractRepository.findById(request.getContractId())
-                    .orElseThrow();}
+                    .orElseThrow();}*/
         Article article = modelMapper.map(request, Article.class);
        // article.setContract(contract);
         Article ArticleSaved = articleRepository.save(article);

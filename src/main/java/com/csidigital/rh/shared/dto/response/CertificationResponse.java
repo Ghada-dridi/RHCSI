@@ -7,11 +7,11 @@ import lombok.Data;
 import java.time.LocalDate;
 @Data
 public class CertificationResponse {
-    private Long id;
-
+    @jakarta.persistence.Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long Id;
     private LocalDate certificationObtainedDate;
     private String certificationTitle;
-
-    private Long technicalFileId ;
+    private Long technicalFileId;
 
 }

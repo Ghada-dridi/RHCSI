@@ -28,9 +28,10 @@ public class Experience {
     private String  experiencePost ;
 
     @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "technicalFileId")
+    @ManyToOne( )
+    @JoinColumn(name = "technicalFileId" )
     private TechnicalFile technicalFile;
 
 
 }
+

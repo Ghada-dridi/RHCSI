@@ -1,9 +1,7 @@
 package com.csidigital.rh.management.service.impl;
 
-import com.csidigital.rh.dao.entity.BenefitRC;
 import com.csidigital.rh.dao.entity.Contract;
 import com.csidigital.rh.dao.entity.ExceptionalFee;
-import com.csidigital.rh.dao.entity.Resource;
 import com.csidigital.rh.dao.repository.ContractRepository;
 import com.csidigital.rh.dao.repository.ExceptionalFeeRepository;
 import com.csidigital.rh.management.service.ExceptionalFeeService;

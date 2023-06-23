@@ -36,7 +36,7 @@ public class Education {
 
 
     @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "technicalFileId")
+    @ManyToOne( )
+    @JoinColumn(name = "technicalFileNum")
     private TechnicalFile technicalFile;
 }

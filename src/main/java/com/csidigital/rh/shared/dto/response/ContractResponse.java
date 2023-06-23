@@ -1,9 +1,6 @@
 package com.csidigital.rh.shared.dto.response;
 
-import com.csidigital.rh.dao.entity.Article;
-import com.csidigital.rh.dao.entity.ArticleUpdated;
-import com.csidigital.rh.dao.entity.BenefitRC;
-import com.csidigital.rh.dao.entity.ExceptionalFee;
+import com.csidigital.rh.dao.entity.*;
 import com.csidigital.rh.shared.enumeration.Status;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,13 +18,15 @@ public class ContractResponse {
     private String contractTitle;
     private LocalDate endDate;
     private String contractPlace;
-
-    private String contractIntroduction;
+    private  String reference;
+    private String contractEmployer;
+    private String contractEmployee;
     private LocalDate contractDate;
     private Byte[] entrepriseSignature;
     private List<ArticleUpdated> articles ;
     private String commentContract;
     private Status contractStatus;
+    private List<Endorsement> endorsementList;
     private List<BenefitRC> benefitRCSList;
     private List<ExceptionalFee>  ExceptionalFeeList;
     private Long employeeId;

@@ -4,8 +4,9 @@ import lombok.Data;
 
 import java.time.LocalDate;
 @Data
+
 public class EducationResponse {
-    private Long id ;
+    private Long Id ;
     private String diploma;
     private String institution;
     private LocalDate obtainedDate;

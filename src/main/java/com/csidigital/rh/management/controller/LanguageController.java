@@ -33,7 +33,7 @@ public class LanguageController {
 
     @PutMapping("/update/{id}")
     public LanguageResponse updateLanguage(@Valid @RequestBody LanguageRequest languageRequest,
-                                                   @PathVariable Long id){
+                                           @PathVariable Long id){
         return languageImpl.updateLanguage(languageRequest, id);
     }
 
