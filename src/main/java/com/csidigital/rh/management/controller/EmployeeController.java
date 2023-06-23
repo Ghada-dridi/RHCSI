@@ -162,7 +162,7 @@ public class EmployeeController {
         employeeService.updateStatusToArchiveById(id);
     }
 
-/*
+    /*
     @PostMapping("/{id}/assignEquipment/{equipmentId}")
     public ResponseEntity<String> assignEquipmentToEmployee(
             @PathVariable Long employeeId,
