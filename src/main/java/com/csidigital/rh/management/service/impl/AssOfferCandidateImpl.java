@@ -1,9 +1,7 @@
 package com.csidigital.rh.management.service.impl;
 
-import com.csidigital.rh.dao.entity.Offer;
-import com.csidigital.rh.dao.entity.OfferCandidate;
-import com.csidigital.rh.dao.repository.AssOfferCandidateRepository;
-import com.csidigital.rh.dao.repository.OfferRepository;
+import com.csidigital.rh.dao.entity.*;
+import com.csidigital.rh.dao.repository.*;
 import com.csidigital.rh.management.service.AssOfferCandidateService;
 import com.csidigital.rh.shared.dto.request.AssOfferCandidateRequest;
 import com.csidigital.rh.shared.dto.response.AssOfferCandidateResponse;
@@ -31,15 +29,19 @@ public class AssOfferCandidateImpl implements AssOfferCandidateService {
     private OfferRepository offerRepository;
 
     @Autowired
-    private CandidateRepository candidateRepository;
+    private EmployeeRepository employeeRepository;
 
     @Override
     public AssOfferCandidateResponse createAssOfferCandidate(AssOfferCandidateRequest request) {
+       /* Evaluation evaluation = null ;
+        if (request.getEvaluationNum()!= null){
+            evaluation = evaluationRepository.findById(request.getEvaluationNum()).orElseThrow();}*/
         Offer offer = offerRepository.findById(request.getOfferNum()).orElseThrow();
-        Candidate candidate = candidateRepository.findById(request.getCandidateNum()).orElseThrow();
+        Employee employee = employeeRepository.findById(request.getEmployeeNum()).orElseThrow();
         OfferCandidate offerCandidate = modelMapper.map(request, OfferCandidate.class);
-        offerCandidate.setCandidate(candidate);
+        offerCandidate.setEmployee(employee);
         offerCandidate.setOffer(offer);
+        // offerCandidate.setEvaluation(evaluation);
         OfferCandidate offerCandidateSaved = assOfferCandidateRepository.save(offerCandidate);
         return modelMapper.map(offerCandidateSaved, AssOfferCandidateResponse.class);
     }
@@ -67,6 +69,20 @@ public class AssOfferCandidateImpl implements AssOfferCandidateService {
     }
 
     @Override
+    public List<Offer> getOffersByEmployeeId(Long employeeId) {
+        Employee employee = employeeRepository.findById(employeeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee with id " + employeeId + " not found"));
+
+        List<Offer> offers = new ArrayList<>();
+        List<OfferCandidate> offerCandidates = employee.getOfferCandidateList();
+        for (OfferCandidate offerCandidate : offerCandidates) {
+            offers.add(offerCandidate.getOffer());
+        }
+
+        return offers;
+    }
+
+    @Override
     public AssOfferCandidateResponse updateAssOfferCandidate(AssOfferCandidateRequest request, Long id) {
         OfferCandidate existingOfferCandidate = assOfferCandidateRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("AssOfferCandidate with id: " + id + " not found"));
@@ -81,4 +97,3 @@ public class AssOfferCandidateImpl implements AssOfferCandidateService {
     }
 
 }
-

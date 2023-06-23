@@ -15,7 +15,7 @@ public class AssOfferCandidateRequest {
    // private Long evaluationId;
 
     private Long offerNum;
-    private Long candidateNum;
+    private Long employeeNum;
 
 
 }

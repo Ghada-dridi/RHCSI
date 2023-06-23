@@ -27,4 +27,6 @@ public class EndorsementResponse {
     @Column(name = "note")
     private String note;
 
+    private Long contractNum;
+
 }

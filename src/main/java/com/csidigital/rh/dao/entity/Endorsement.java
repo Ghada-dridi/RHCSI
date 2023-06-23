@@ -1,6 +1,7 @@
 package com.csidigital.rh.dao.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,7 +31,9 @@ public class Endorsement {
     @Column(name = "note")
     private String note;
 
+    @JsonIgnore
+    @ManyToOne
     @JoinColumn(name = "id_contract")
-     private Contract contract;
+    private Contract contract;
 
 }
