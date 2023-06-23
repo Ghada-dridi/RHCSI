@@ -31,6 +31,6 @@ public class Endorsement {
     private String note;
 
     @JoinColumn(name = "id_contract")
-    private Contract contrat;
+     private Contract contract;
 
 }
