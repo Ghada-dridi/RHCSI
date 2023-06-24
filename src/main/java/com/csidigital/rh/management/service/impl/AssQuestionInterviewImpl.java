@@ -1,15 +1,11 @@
 package com.csidigital.rh.management.service.impl;
 
 import com.csidigital.rh.dao.entity.*;
-import com.csidigital.rh.dao.repository.AdministrativeDataRepository;
 import com.csidigital.rh.dao.repository.AssQuestionInterviewRepository;
 import com.csidigital.rh.dao.repository.InterviewRepository;
 import com.csidigital.rh.dao.repository.QuestionRepository;
-import com.csidigital.rh.management.service.AdministrativeDataService;
 import com.csidigital.rh.management.service.AssQuestionInterviewService;
-import com.csidigital.rh.shared.dto.request.AdministrativeDataRequest;
 import com.csidigital.rh.shared.dto.request.AssQuestionInterviewRequest;
-import com.csidigital.rh.shared.dto.response.AdministrativeDataResponse;
 import com.csidigital.rh.shared.dto.response.AssQuestionInterviewResponse;
 import com.csidigital.rh.shared.exception.ResourceNotFoundException;
 import jakarta.transaction.Transactional;

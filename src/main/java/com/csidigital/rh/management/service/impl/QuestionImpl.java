@@ -1,6 +1,9 @@
 package com.csidigital.rh.management.service.impl;
 
 import com.csidigital.rh.dao.entity.Question;
+import com.csidigital.rh.dao.entity.QuestionCategory;
+import com.csidigital.rh.dao.entity.TechnicalFile;
+import com.csidigital.rh.dao.repository.QuestionCategoryRepository;
 import com.csidigital.rh.dao.repository.QuestionRepository;
 import com.csidigital.rh.management.service.QuestionService;
 import com.csidigital.rh.shared.dto.request.QuestionRequest;
@@ -23,11 +26,15 @@ public class QuestionImpl implements QuestionService {
     @Autowired
     private QuestionRepository questionRepository ;
     @Autowired
+    private QuestionCategoryRepository questionCategoryRepository ;
+    @Autowired
     private ModelMapper modelMapper;
 
     @Override
     public QuestionResponse createQuestion(QuestionRequest request) {
+        QuestionCategory questionCategory= questionCategoryRepository.findById(request.getCategoryNum()).orElseThrow();
         Question question = modelMapper.map(request, Question.class);
+        question.setQuestionCategory(questionCategory);
         Question QuestionSaved = questionRepository.save(question);
         return modelMapper.map(QuestionSaved, QuestionResponse.class);
     }

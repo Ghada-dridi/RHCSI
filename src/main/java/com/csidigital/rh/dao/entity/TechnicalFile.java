@@ -55,10 +55,10 @@ public class TechnicalFile{
     @OneToMany(mappedBy = "technicalFile", cascade = CascadeType.ALL)
     private List<Education> educationList;
 
+
     @OneToOne (
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,
-            mappedBy = "technicalFile")
+            cascade = CascadeType.ALL)
+    @JoinColumn(name = "employeeId")
     private Employee employee;
 
 

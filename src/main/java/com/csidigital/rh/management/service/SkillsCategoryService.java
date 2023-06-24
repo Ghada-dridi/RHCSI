@@ -1,8 +1,6 @@
 package com.csidigital.rh.management.service;
 
-import com.csidigital.rh.shared.dto.request.ResourceRequest;
 import com.csidigital.rh.shared.dto.request.SkillsCategoryRequest;
-import com.csidigital.rh.shared.dto.response.ResourceResponse;
 import com.csidigital.rh.shared.dto.response.SkillsCategoryResponse;
 
 import java.util.List;

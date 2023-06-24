@@ -18,6 +18,8 @@ public class Endorsement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
+    @Column(name="reference")
+    private String reference;
     @Column(name = "title")
     private String title;
     @Column(name = "nationalBRNumber")

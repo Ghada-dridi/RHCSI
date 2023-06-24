@@ -1,5 +1,6 @@
 package com.csidigital.rh.dao.entity;
 
+
 import com.csidigital.rh.shared.enumeration.InterviewType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -14,24 +15,20 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Question {
+public class UpdatedQuestion {
+
     @jakarta.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long Id;
-    private String question;
-    @Enumerated(EnumType.STRING)
+    private Integer mark;
+    private String comment;
+    private String questionText;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "question")
-    private List<AssQuestionInterview> assQuestionInterviewList ;
+
+    @Enumerated(EnumType.STRING)
+    private InterviewType interviewType;
 
     @ManyToOne()
-    @JsonIgnore
-    @JoinColumn(name = "categoryId")
-    private QuestionCategory questionCategory;
+    @JoinColumn(name = "interviewId")
+    private Interview interview ;
 }
-
-
-
-

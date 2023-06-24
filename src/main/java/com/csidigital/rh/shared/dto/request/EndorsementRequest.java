@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Data
 public class EndorsementRequest {
 
-
+    private String reference;
     @Column(name = "title")
     private String title;
     @Column(name = "nationalBRNumber")

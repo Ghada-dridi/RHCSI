@@ -11,9 +11,11 @@ import java.util.Set;
 public class QuestionResponse {
     @jakarta.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long Id;
+
     private String question;
-    private InterviewType interviewType;
     private Set<Long> interview;
+
+    private Long categoryNum ;
+
 }

@@ -14,6 +14,7 @@ public class EndorsementResponse {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
+    private String reference;
     @Column(name = "title")
     private String title;
     @Column(name = "nationalBRNumber")
