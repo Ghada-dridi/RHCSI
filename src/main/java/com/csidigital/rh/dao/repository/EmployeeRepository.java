@@ -91,4 +91,21 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     //filtrer les employés selon leurs status
     List<Employee> findByEmployeeStatus(EmployeeStatus employeeStatus);
 
+    //Statistiques
+    @Query(value = "SELECT COUNT(*) FROM employee WHERE employee_status = 'CONVERTED_TO_RESOURCE'", nativeQuery = true)
+    int countConvertedToRessource();
+    @Query(value = "SELECT COUNT(*) FROM employee WHERE employee_status = 'ARCHIVE'", nativeQuery = true)
+    int countArchived();
+
+    @Query(value = "SELECT COUNT(*) FROM employee WHERE employee_status = 'DO_NOT_CONTACT'", nativeQuery = true)
+    int countDONOTCONTACT();
+    @Query(value = "SELECT COUNT(*) FROM employee WHERE employee_status = 'IN_PROCESS'", nativeQuery = true)
+    int countINPROCESS();
+    @Query(value = "SELECT COUNT(*) FROM employee WHERE employee_status = 'IN_PROGRESS'", nativeQuery = true)
+    int countINPROGRESS();
+    @Query(value = "SELECT COUNT(*) FROM employee WHERE employee_status = 'PRE_QUALIFIED'", nativeQuery = true)
+    int countPREQUALIFIED();
+    @Query(value = "SELECT COUNT(*) FROM employee WHERE employee_status = 'TOP_PROFILES'", nativeQuery = true)
+    int countTOPPROFILES();
+
 }

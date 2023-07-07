@@ -2,6 +2,7 @@ package com.csidigital.rh.shared.dto.response;
 
 import com.csidigital.rh.dao.entity.*;
 import com.csidigital.rh.shared.enumeration.Status;
+import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import lombok.Data;
@@ -19,6 +20,7 @@ public class ContractResponse {
     private LocalDate endDate;
     private String contractPlace;
     private  String reference;
+    private LocalDate validityDate;
     private String contractEmployer;
     private String contractEmployee;
     private LocalDate contractDate;

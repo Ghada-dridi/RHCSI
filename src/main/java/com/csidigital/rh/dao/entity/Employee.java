@@ -71,16 +71,16 @@ public class Employee {
     private ResourceType resourceType;
 
     @JsonIgnore
-
     @OneToOne(cascade = CascadeType.ALL,
             mappedBy = "employee")
     private TechnicalFile technicalFile;
 
+
+    @JsonIgnore
     @OneToMany(mappedBy = "employee" ,cascade = CascadeType.ALL)
     private List<OfferCandidate> offerCandidateList;
     @JsonIgnore
-
-    @OneToOne(mappedBy = "employee")
+    @OneToOne(mappedBy = "employee" ,cascade = CascadeType.ALL)
     private AdministrativeData administrativeData;
     @JsonIgnore
     @OneToMany(mappedBy = "employee" , cascade = CascadeType.ALL)
@@ -100,11 +100,13 @@ public class Employee {
     private Boolean isEmployee;
 
 
-    @OneToMany(mappedBy = "employee")
+    @JsonIgnore
+    @OneToMany(mappedBy = "employee" ,cascade = CascadeType.ALL)
     private List<Contract> contractsList;
 
     //relation  oneTomany avec availability
-    @OneToMany(mappedBy = "employee")
+    @JsonIgnore
+    @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL)
     private List<Availability> availabilityList;
 
 

@@ -1,8 +1,7 @@
 package com.csidigital.rh.dao.entity;
 
-import com.csidigital.rh.shared.enumeration.ExternalTimeOffType;
-import com.csidigital.rh.shared.enumeration.RequestStatus;
-import com.csidigital.rh.shared.enumeration.TimeOffType;
+import com.csidigital.rh.shared.enumeration.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,9 +19,7 @@ public class TimeOff {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long Id;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "timeOffType")
-    private TimeOffType timeOffType;
+
     @Column(name = "description")
     private String description;
     @Column(name = "startDate")
@@ -30,7 +27,7 @@ public class TimeOff {
     @Column(name = "endDate")
     private LocalDate endDate;
     @Column(name = "timeOffPeriod")
-    private String timeOffPeriod;
+    private Double timeOffPeriod;
     @Column(name = "comment")
     private String comment;
     @Column(name = "requestInputDate")
@@ -43,6 +40,25 @@ public class TimeOff {
     @Enumerated(EnumType.STRING)
     @Column(name = "externalTimeOffType")
     private ExternalTimeOffType externalTimeOffType;
+
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "timeOffPeriodType")
+    private TimeOffPeriodType timeOffPeriodType;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "timeOfTimeType")
+    private TimeOfTimeType timeOfTimeType;
+
+    @Lob
+    private String justificationDoc;
+
+    @ManyToOne
+    @JoinColumn(name = "employeeId")
+    private Employee employee;
+
+    @ManyToOne
+    @JoinColumn(name = "leaveTypeId")
+    private LeaveType leaveType;
 
 
 }

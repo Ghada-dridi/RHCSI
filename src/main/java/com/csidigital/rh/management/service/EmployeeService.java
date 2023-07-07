@@ -6,6 +6,7 @@ import com.csidigital.rh.shared.dto.response.EmployeeResponse;
 
 import com.csidigital.rh.shared.dto.request.EmployeeRequest;
 import com.csidigital.rh.shared.dto.response.*;
+import org.springframework.data.jpa.repository.Query;
 
 
 import java.util.List;
@@ -56,5 +57,21 @@ public interface EmployeeService {
     public List<Contract> getContractsEmployee(Long id);
 
     public List<Availability> getAvailabilityEmployee(Long id);
+
+    //Statistiques
+
+    int countConvertedToRessource();
+
+    int countArchived();
+
+
+    int countDONOTCONTACT();
+
+    int countINPROCESS();
+
+    int countPREQUALIFIED();
+
+    int countTOPPROFILES();
+    int countINPROGRESS();
 }
 

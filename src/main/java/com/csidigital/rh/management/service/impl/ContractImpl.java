@@ -192,6 +192,12 @@ public class ContractImpl implements ContractService {
         contractRepository.updateStatusToRefusedById(id);
 
     }
+
+    @Override
+    public void updateStatusToExpiredById(Long id) {
+        contractRepository.updateStatusToExpiredById(id);
+    }
+
     @Override
     public List<BenefitRC> getContractBenefits(Long id) {
         Contract contract = contractRepository.findById(id)
@@ -214,6 +220,36 @@ public class ContractImpl implements ContractService {
     @Override
     public void updateStatusToSentById(Long id) {
         contractRepository.updateStatusToSentById(id);
+    }
+
+    @Override
+    public int countContractsByStillPendingStatus() {
+        return contractRepository.countContractsByStillPendingStatus();
+    }
+
+    @Override
+    public int countContractsByRefusedStatus() {
+        return contractRepository.countContractsByRefusedStatus();
+    }
+
+    @Override
+    public int countContractsByAcceptedStatus() {
+        return contractRepository.countContractsByAcceptedStatus();
+    }
+
+    @Override
+    public int countContractsBySentStatus() {
+        return contractRepository.countContractsBySentStatus();
+    }
+
+    @Override
+    public int countContractsByExpiredStatus() {
+        return  contractRepository.countContractsByExpiredStatus();
+    }
+
+    @Override
+    public List<Contract> getAllAccepted() {
+        return contractRepository.getAllAccepted();
     }
 
 

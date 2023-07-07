@@ -26,7 +26,13 @@ public class Equipment {
     private String designation;
     private LocalDate acquisitionDate;
     private LocalDate endDate;
+    private LocalDate restituationDate;
+
+    @Column(name = "restituationStatus", length = 10000)
+    private String restituationStatus;
     private Double purchasePrise;
+
+    @Column(name = "comment", length = 10000)
     private String comment;
     private String supplier;
     private Boolean amortizable;
@@ -46,6 +52,7 @@ public class Equipment {
 
     private String motifUnavailability;
     private LocalDate disponibilityDate;
+    private String supplierOrderNumber;
 
     //relation  manytomany avec employee
 

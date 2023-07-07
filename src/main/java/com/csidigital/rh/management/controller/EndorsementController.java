@@ -46,4 +46,54 @@ public class EndorsementController {
     public void deleteEndorsement(@PathVariable Long id){
         endorsementImpl.deleteEndorsement(id);
     }
+
+    @PutMapping("/updateStatusById")
+    void updateStatusById(Long id, String status){
+        endorsementImpl.updateStatusById(id, status);
+    }
+    @PutMapping("/updateToAcceptedById/{id}")
+    void updateStatusToAcceptedById(@PathVariable Long id){
+        endorsementImpl.updateStatusToAcceptedById(id);
+    }
+    @PutMapping("/updateToRefusedById/{id}")
+    void updateStatusToRefusedById(@PathVariable Long id){
+        endorsementImpl.updateStatusToRefusedById(id);
+    }
+    @PutMapping("/updateToSentById/{id}")
+    void updateStatusToSentById(@PathVariable Long id){
+
+        endorsementImpl.updateStatusToSentById(id);
+    }
+    @PutMapping("/updateToExpiredById/{id}")
+    void updateStatusToExpiredById(@PathVariable Long id){
+
+        endorsementImpl.updateStatusToExpiredById(id);
+    }
+    //statistiqques
+    @GetMapping("/countAllPending")
+    public int countStillPendingStatus(){
+
+        return endorsementImpl.countStillPendingStatus();
+    }
+    @GetMapping("/countAllRefused")
+    public int countRefusedStatus(){
+
+        return endorsementImpl.countRefusedStatus();
+    }
+    @GetMapping("/countAllAccepted")
+    public int countAcceptedStatus(){
+
+        return endorsementImpl.countAcceptedStatus();
+    }
+    @GetMapping("/countAllSent")
+    public int counttSentStatus(){
+
+        return endorsementImpl.countSentStatus();
+    }
+
+    @GetMapping("/countAllExpired")
+    public int countExpiredStatus(){
+
+        return endorsementImpl.countExpiredStatus();
+    }
 }

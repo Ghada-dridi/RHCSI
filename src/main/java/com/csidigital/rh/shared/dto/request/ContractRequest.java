@@ -25,6 +25,8 @@ public class ContractRequest {
     private String contractEmployee;
     private  String reference;
 
+    private LocalDate validityDate;
+
     private List<ArticleUpdated> articles  ;
     private Status contractStatus;
     private List<Endorsement> endorsementList;

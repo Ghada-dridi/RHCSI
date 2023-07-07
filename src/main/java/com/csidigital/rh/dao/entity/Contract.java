@@ -32,6 +32,8 @@ public class Contract {
     private LocalDate startDate;
     @Column(name = "endDate")
     private LocalDate endDate;
+    @Column(name = "validityDate")
+    private LocalDate validityDate;
 
     private String commentContract;
     @Column(name = "entrepriseSignature")

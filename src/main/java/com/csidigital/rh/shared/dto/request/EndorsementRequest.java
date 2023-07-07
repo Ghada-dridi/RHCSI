@@ -1,9 +1,8 @@
 package com.csidigital.rh.shared.dto.request;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import com.csidigital.rh.shared.enumeration.Status;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -20,10 +19,14 @@ public class EndorsementRequest {
     private String address;
     @Column(name = "endorsementDate")
     private LocalDate endorsementDate;
-    @Column(name = "titleNote")
-    private String titleNote;
+    @Column(name = "object")
+    private String object;
     @Column(name = "note")
     private String note;
+    private LocalDate validityDate;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     private  Long contractNum;
 }

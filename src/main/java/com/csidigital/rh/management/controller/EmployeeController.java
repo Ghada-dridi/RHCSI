@@ -70,7 +70,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/add")
-    public EmployeeResponse createEmployee(@Valid @RequestBody EmployeeRequest employeeRequest){
+    public EmployeeResponse createEmployee(@Valid @RequestBody EmployeeRequest employeeRequest) {
         return employeeService.createEmployee(employeeRequest);
     }
 
@@ -176,9 +176,40 @@ public class EmployeeController {
     public List<Contract> getContractsEmployee(@PathVariable Long id) {
         return employeeService.getContractsEmployee(id);
     }
+
     @GetMapping("/{id}/getAvailabilityEmployee")
     public List<Availability> getAvailabilityEmployee(@PathVariable Long id) {
         return employeeService.getAvailabilityEmployee(id);
+    }
+
+
+    @GetMapping("/countAllConvertedToResource")
+    public int countConvertedToRessource(){
+        return employeeService.countConvertedToRessource();
+    }
+    @GetMapping("/countAllArchived")
+    public int countArchived(){
+        return employeeService.countArchived();
+    }
+    @GetMapping("/countAllDoNotContact")
+    public int countDoNotContact(){
+        return employeeService.countDONOTCONTACT();
+    }
+    @GetMapping("/countAllInProcess")
+    public int countINPROCESS(){
+        return employeeService.countINPROCESS();
+    }
+    @GetMapping("/countAllPreQualified")
+    public int countPREQUALIFIED(){
+        return employeeService.countPREQUALIFIED();
+    }
+    @GetMapping("/countAllTopProfiles")
+    public int countTOPPROFILES(){
+        return employeeService.countTOPPROFILES();
+    }
+    @GetMapping("/countAllInProgress")
+    public int countINPROGRESS(){
+        return employeeService.countINPROGRESS();
     }
 }
 

@@ -23,7 +23,10 @@ public class EquipmentResponse {
     private String supplier;
     private Boolean amortizable;
 
+    private String supplierOrderNumber;
     private Boolean affectable;
+    private LocalDate restituationDate;
+    private String restituationStatus;
     @Enumerated(EnumType.STRING)
     private Affectation affectation;
     @Enumerated(EnumType.STRING)

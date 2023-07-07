@@ -38,8 +38,9 @@ public interface EquipmentRepository extends JpaRepository<Equipment,Long> {
     @Query(value = " UPDATE equipment SET affectation = 'UNAFFECTED' WHERE id =:id", nativeQuery = true)
     void updateUnaffectedById(@Param("id") Long id);
 
-    @Query(value ="SELECT * FROM equipment WHERE affectable IS TRUE ORDER BY Id DESC;",nativeQuery = true)
+    @Query(value ="SELECT * FROM equipment WHERE affectable IS TRUE ORDER BY Id DESC;", nativeQuery = true)
     List<Equipment> getAffectableEquipments();
+
 
 
     @Query("SELECT COUNT(e) FROM Equipment e")

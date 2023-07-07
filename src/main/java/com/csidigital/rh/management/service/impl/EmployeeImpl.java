@@ -365,18 +365,43 @@ public class EmployeeImpl implements EmployeeService {
         return availabilityList;
     }
 
-/*
-    public void assignEquipmentToEmployee(Long equipmentId, Long employeeId) {
-        Equipment equipment = equipmentRepository.findById(equipmentId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid equipment ID"));
-
-        Employee employee = employeeRepository.findById(employeeId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid employee ID"));
-
-        equipment.setEmployee(employee);
-        equipmentRepository.save(equipment);
+    @Override
+    public int countConvertedToRessource() {
+        return employeeRepository.countConvertedToRessource();
     }
-*/
+
+    @Override
+    public int countArchived() {
+        return employeeRepository.countArchived();
+    }
+
+    @Override
+    public int countDONOTCONTACT() {
+        return employeeRepository.countDONOTCONTACT();
+    }
+
+    @Override
+    public int countINPROCESS() {
+        return employeeRepository.countINPROCESS();
+    }
+
+    @Override
+    public int countPREQUALIFIED() {
+        return employeeRepository.countPREQUALIFIED();
+    }
+
+    @Override
+    public int countTOPPROFILES() {
+        return employeeRepository.countTOPPROFILES();
+    }
+
+    @Override
+    public int countINPROGRESS() {
+        return employeeRepository.countINPROGRESS();
+    }
+
+
+
 
 }
 

@@ -1,9 +1,6 @@
 package com.csidigital.rh.management.controller;
 
-import com.csidigital.rh.dao.entity.ArticleUpdated;
-import com.csidigital.rh.dao.entity.BenefitRC;
-import com.csidigital.rh.dao.entity.Employee;
-import com.csidigital.rh.dao.entity.ExceptionalFee;
+import com.csidigital.rh.dao.entity.*;
 import com.csidigital.rh.management.service.impl.CertificationImpl;
 import com.csidigital.rh.management.service.impl.ContractImpl;
 import com.csidigital.rh.shared.dto.request.CertificationRequest;
@@ -77,8 +74,45 @@ public class ContractController {
 
         contract.updateStatusToSentById(id);
     }
+    @PutMapping("/updateToExpiredById/{id}")
+    void updateStatusToExpiredById(@PathVariable Long id){
+
+        contract.updateStatusToExpiredById(id);
+    }
     @GetMapping("/getArticleContractById/{id}")
     public List<ArticleUpdated> getArticleContractById(@PathVariable Long id){
         return  contract.getArticleContractById(id);
+    }
+    @GetMapping("/countAllPending")
+    public int countContractsByStillPendingStatus(){
+
+        return contract.countContractsByStillPendingStatus();
+    }
+    @GetMapping("/countAllRefused")
+    public int countContractsByRefusedStatus(){
+
+        return contract.countContractsByRefusedStatus();
+    }
+    @GetMapping("/countAllAccepted")
+    public int countContractsByAcceptedStatus(){
+
+        return contract.countContractsByAcceptedStatus();
+    }
+    @GetMapping("/countAllSent")
+    public int countContractsBySentStatus(){
+
+        return contract.countContractsBySentStatus();
+    }
+
+    @GetMapping("/countAllExpired")
+    public int countContractsByExpiredStatus(){
+
+        return contract.countContractsByExpiredStatus();
+    }
+
+
+    @GetMapping("/getAllAccepted")
+    public List<Contract> getAllAccepted(){
+        return contract.getAllAccepted();
     }
 }

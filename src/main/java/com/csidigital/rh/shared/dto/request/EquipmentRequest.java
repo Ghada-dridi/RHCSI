@@ -21,7 +21,10 @@ public class EquipmentRequest {
     private String supplier;
     private Boolean amortizable;
     private Currency currency;
+    private LocalDate restituationDate;
+    private String restituationStatus;
 
+    private String supplierOrderNumber;
     private Boolean affectable;
     @Enumerated(EnumType.STRING)
     private Affectation affectation;

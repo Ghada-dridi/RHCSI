@@ -10,6 +10,7 @@ import com.csidigital.rh.management.service.EndorsementService;
 import com.csidigital.rh.shared.dto.request.EndorsementRequest;
 import com.csidigital.rh.shared.dto.response.ArticleResponse;
 import com.csidigital.rh.shared.dto.response.EndorsementResponse;
+import com.csidigital.rh.shared.enumeration.Status;
 import com.csidigital.rh.shared.exception.ResourceNotFoundException;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -55,6 +56,7 @@ public class EndorsementImpl implements EndorsementService {
         }
         String finalReference = reference + "_" + endorsementSuffix;
         EndorsementSaved.setReference(finalReference);
+        endorsement.setStatus(Status.STILL_PENDING);
         return modelMapper.map( EndorsementSaved , EndorsementResponse.class);
     }
     /*@Override
@@ -90,6 +92,10 @@ public class EndorsementImpl implements EndorsementService {
         Endorsement existingEndorsement = endorsementRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Article with id: " + id + " not found"));
         modelMapper.map(request, existingEndorsement);
+        // Mettre à jour le statut du contrat s'il est null
+        if (existingEndorsement.getStatus() == null) {
+            existingEndorsement.setStatus(Status.STILL_PENDING);
+        }
         Endorsement savedEndorsement = endorsementRepository.save(existingEndorsement);
         return modelMapper.map(savedEndorsement, EndorsementResponse.class);
     }
@@ -98,5 +104,55 @@ public class EndorsementImpl implements EndorsementService {
     public void deleteEndorsement(Long id) {
         endorsementRepository.deleteById(id);
 
+    }
+
+    @Override
+    public void updateStatusById(Long id, String status) {
+        endorsementRepository.updateStatusById(id, status);
+    }
+
+    @Override
+    public void updateStatusToAcceptedById(Long id) {
+    endorsementRepository.updateStatusToAcceptedById(id);
+    }
+
+    @Override
+    public void updateStatusToRefusedById(Long id) {
+     endorsementRepository.updateStatusToRefusedById(id);
+    }
+
+    @Override
+    public void updateStatusToExpiredById(Long id) {
+    endorsementRepository.updateStatusToExpiredById(id);
+    }
+
+    @Override
+    public void updateStatusToSentById(Long id) {
+     endorsementRepository.updateStatusToSentById(id);
+    }
+
+    @Override
+    public int countStillPendingStatus() {
+        return endorsementRepository.countStillPendingStatus();
+    }
+
+    @Override
+    public int countRefusedStatus() {
+        return endorsementRepository.countRefusedStatus();
+    }
+
+    @Override
+    public int countAcceptedStatus() {
+        return endorsementRepository.countAcceptedStatus();
+    }
+
+    @Override
+    public int countSentStatus() {
+        return endorsementRepository.countSentStatus();
+    }
+
+    @Override
+    public int countExpiredStatus() {
+        return endorsementRepository.countExpiredStatus();
     }
 }

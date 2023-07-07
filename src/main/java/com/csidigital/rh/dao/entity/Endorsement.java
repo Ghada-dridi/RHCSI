@@ -1,6 +1,7 @@
 package com.csidigital.rh.dao.entity;
 
 
+import com.csidigital.rh.shared.enumeration.Status;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,16 +23,18 @@ public class Endorsement {
     private String reference;
     @Column(name = "title")
     private String title;
-    @Column(name = "nationalBRNumber")
-    private String nationalBRNumber;
-    @Column(name = "address")
-    private String address;
     @Column(name = "endorsementDate")
     private LocalDate endorsementDate;
-    @Column(name = "titleNote")
-    private String titleNote;
+    @Column(name = "object")
+    private String object;
     @Column(name = "note")
     private String note;
+
+    @Column(name ="validityDate")
+    private LocalDate validityDate;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @JsonIgnore
     @ManyToOne
