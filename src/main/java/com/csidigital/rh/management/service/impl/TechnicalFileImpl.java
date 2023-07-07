@@ -1,8 +1,10 @@
 package com.csidigital.rh.management.service.impl;
 
 import com.csidigital.rh.dao.entity.AdministrativeData;
+import com.csidigital.rh.dao.entity.Employee;
 import com.csidigital.rh.dao.entity.Skills;
 import com.csidigital.rh.dao.entity.TechnicalFile;
+import com.csidigital.rh.dao.repository.EmployeeRepository;
 import com.csidigital.rh.dao.repository.SkillsRepository;
 import com.csidigital.rh.dao.repository.TechnicalFileRepository;
 import com.csidigital.rh.management.service.TechnicalFileService;
@@ -27,12 +29,15 @@ public class TechnicalFileImpl implements TechnicalFileService {
     @Autowired
     private TechnicalFileRepository technicalFileRepository;
     @Autowired
+    private EmployeeRepository employeeRepository;
+    @Autowired
     private ModelMapper modelMapper;
 
     @Override
     public TechnicalFileResponse createTechnicalFile(TechnicalFileRequest request) {
-
+        Employee employee =  employeeRepository.findById(request.getEmployeeNum()).orElseThrow();
         TechnicalFile technicalFile= modelMapper.map(request, TechnicalFile.class);
+        technicalFile.setEmployee(employee);
         TechnicalFile technicalFileSaved = technicalFileRepository.save(technicalFile);
         return modelMapper.map(technicalFileSaved, TechnicalFileResponse .class);
     }

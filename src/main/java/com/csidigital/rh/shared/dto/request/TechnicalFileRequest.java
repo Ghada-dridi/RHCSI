@@ -23,4 +23,7 @@ public class TechnicalFileRequest {
     private List<Certification> certificationList;
     private List<Education> educationList;
 
+    private Long employeeNum;
+
+
 }
